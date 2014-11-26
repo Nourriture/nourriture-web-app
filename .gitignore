@@ -26,3 +26,10 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+# Ignore WebStorm's preference directory
+.idea/
+
+# Libraries installed by Bower
+bower/
+bower_components
