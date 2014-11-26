@@ -8,5 +8,5 @@ var app = angular.module('NourritureWebApp', []);
 
 app.controller("MainCtrl", ['$scope', '$http', function ($scope, $http) {
     // Application state
-    $scope.name = "John";
+    $scope.name = "World";
 }]);
