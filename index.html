@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html id="ng-app" ng-app="NourritureWebApp">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Nourriture Web App</title>
     <link rel=stylesheet type=text/css href="css/style.css">
     <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
 </head>
 <body>
-<h1>Hello world!</h1>
+    <div ng-controller="MainCtrl">
+        <h1>Hello {{ name }}!</h1>
+        <p>
+            <span>What's your name?</span>
+            <input type="text" ng-model="name" />
+        </p>
+    </div>
 </body>
 </html>
