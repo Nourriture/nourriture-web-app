@@ -3,3 +3,7 @@
     margin-left: 6px;
     padding: 3px;
 }
+
+.navbar-form.form-search input[type=text] {
+    width: 220px;
+}

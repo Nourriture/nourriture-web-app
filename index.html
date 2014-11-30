@@ -1,36 +1,168 @@
 <!DOCTYPE html>
-<html id="ng-app" ng-app="NourritureWebApp">
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Nourriture Web App</title>
-    <link rel=stylesheet type=text/css href="css/style.css">
-    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
-    <script type="text/javascript" src="js/controllers.js"></script>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+
+    <title>Nourriture - Connecting ingredients with people!</title>
+
+    <meta name="description" content="Nourriture front page" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+
+    <!-- ace text fonts, style, extra -->
+    <link rel="stylesheet" href="css/ace/ace-fonts.css" />
+    <link rel="stylesheet" href="css/ace/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <script src="js/ace/ace-extra.js"></script>
+
+    <!-- Nourriture custom -->
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-    <div ng-controller="MainCtrl">
-        <h1>Nourriture Web App</h1>
-        <hr />
 
-        <h3>Hello, {{ name }}</h3>
-        <p id="nameForm">
-            <span>What's your name?</span>
-            <input type="text" ng-model="name" />
-        </p>
-        <hr />
+<body class="no-skin">
 
-        <div>
-            <ul ng-if="!loaderror">
-                <li ng-repeat="ingredient in ingredients">
-                    <strong>{{ ingredient.name }}</strong>
-                    <p>Calories: {{ ingredient.calories }},
-                        Carbs: {{ingredient.carbs }},
-                        Protein: {{ingredient.protein }},
-                        Fat: {{ ingredient.fat}}</p>
+<!-- Navigation bar (top) -->
+<div id="navbar" class="navbar navbar-default navbar-collapse h-navbar">
+    <div class="navbar-container container" id="navbar-container">
+
+        <div class="navbar-header pull-left">
+            <!-- Logo -->
+            <a href="#" class="navbar-brand">
+                <small>
+                    <i class="fa fa-cutlery"></i>
+                    Nourriture
+                </small>
+            </a>
+
+            <!-- Toggle collapsed navbar (shown on phone/tablet) -->
+            <button class="pull-right navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- User account menu (right) -->
+        <div class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="light-blue user-min">
+                    <!-- User account logo/button -->
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="img/user.jpg" alt="Jason's Photo" />
+								<span class="user-info">
+									<small>Welcome,</small>
+									Jason
+								</span>
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <!-- User account dropdown content -->
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-cog"></i>
+                                Settings
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="profile.html">
+                                <i class="ace-icon fa fa-user"></i>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+
                 </li>
             </ul>
-            <p ng-if="loaderror">Failed to load ingredients...</p>
         </div>
+
+        <!-- Navigation menu (middle-left) -->
+        <nav role="navigation" class="navbar-menu pull-left collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Recipes&nbsp;
+                        <i class="ace-icon fa fa-angle-down bigger-110"></i>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-light-blue dropdown-caret">
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-newspaper-o bigger-110 blue"></i>
+                                Newest
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-star bigger-110 blue"></i>
+                                Popular
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="ace-icon fa fa-tag bigger-110 blue"></i>
+                                Categories
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Gastronomists
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Search bar -->
+            <form class="navbar-form navbar-left form-search" role="search">
+                <div class="form-group">
+                    <input type="text" placeholder="Food search!" />
+                </div>
+
+                <button type="button" class="btn btn-xs btn-info2">
+                    <i class="ace-icon fa fa-search icon-only bigger-110"></i>
+                </button>
+            </form>
+        </nav>
     </div>
+</div>
+
+<!-- Page content -->
+<div class="main-container container" id="main-container">
+    <!-- TODO: Content -->
+</div>
+
+<!-- JQuery -->
+<!--[if !IE]> -->
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='bower_components/jquery/dist/jquery.js'>"+"<"+"/script>");
+</script>
+<!-- <![endif]-->
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='js/jquery.mobile.custom.js'>"+"<"+"/script>");
+</script>
+
+<!-- Bootstrap & Ace -->
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="js/ace/ace.js"></script>
+<script src="js/ace/ace-elements.js"></script>
+
 </body>
 </html>
