@@ -7,3 +7,11 @@
 .navbar-form.form-search input[type=text] {
     width: 220px;
 }
+
+#main-container>div {
+    padding: 48px 60px 48px 60px;
+}
+
+#main-container > .jumbotron {
+    margin: 0;
+}
