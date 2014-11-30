@@ -176,15 +176,14 @@
 
     <!-- Ingredient list example -->
     <div ng-controller="MainCtrl">
-        <h2>Angular example</h2>
-        <hr />
-
-        <strong>Hello, {{ name }}</strong>
-        <p id="nameForm">
-            <span>What's your name?</span>
-            <input type="text" ng-model="name" />
-        </p>
-        <hr />
+        <h3 class="row header smaller lighter blue">Angular example</h3>
+        <div>
+            <strong>Hello, {{ name }}</strong>
+            <p id="nameForm">
+                <span>What's your name?</span>
+                <input type="text" ng-model="name" />
+            </p>
+        </div>
 
         <div>
             <ul ng-if="!loaderror">
