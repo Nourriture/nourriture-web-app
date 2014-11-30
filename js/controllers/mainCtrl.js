@@ -1,14 +1,15 @@
 /**
  * Created by niels on 11/26/14.
  *
- * Main angular script file where controllers are either defined or referenced
+ *  The main controller module which all other controllers are based on.
+ *  Also, the controller "mainCtrl" used by the frontpage is defined here.
  */
 
-var app = angular.module('NourritureWebApp', []);
+var ctrls = angular.module('nourControllers', []);
 var host = "http://localhost:2121";
 //var host = "http://dev.9la.dk/platform";
 
-app.controller("MainCtrl", ['$scope', '$http', function ($scope, $http) {
+ctrls.controller("mainCtrl", ['$scope', '$http', function ($scope, $http) {
     // Application state
     $scope.name = "World";
     $scope.ingredients = [];
