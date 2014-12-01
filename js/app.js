@@ -6,8 +6,10 @@
 
 var app = angular.module('nourWebApp', ["ngRoute", "nourControllers", "userServices"]);
 
-app.config(["$routeProvider",
-    function ($routeProvider) {
+app.config(["$routeProvider", "$httpProvider",
+    function ($routeProvider, $httpProvider) {
+        $httpProvider.defaults.withCredentials = true;
+
         $routeProvider.
             when('/', {
                 templateUrl: "/partials/frontpage.html",
