@@ -20,7 +20,6 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
                     // Any other error
                     $scope.error = "Unexpected"
                 }
-                // TODO: Show appropriate error message
                 console.log("Login failed");
             }
         });
