@@ -4,7 +4,7 @@
  * Main Angular script file for application
  */
 
-var app = angular.module('nourWebApp', ["ngRoute", "nourControllers"]);
+var app = angular.module('nourWebApp', ["ngRoute", "nourControllers", "userServices"]);
 
 app.config(["$routeProvider",
     function ($routeProvider) {
@@ -15,7 +15,7 @@ app.config(["$routeProvider",
             }).
             when('/login', {
                 templateUrl: "/partials/login.html",
-                controller: "userCtrl"
+                controller: "loginCtrl"
             }).
             when('/recipes', {
                 templateUrl: "/partials/recipes.html",

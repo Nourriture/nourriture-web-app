@@ -47,7 +47,7 @@
         </div>
 
         <!-- User account menu (right) -->
-        <div id="nav-user" class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation" ng-controller="userCtrl">
+        <div id="nav-user" class="navbar-buttons navbar-header pull-right  collapse navbar-collapse" role="navigation" ng-controller="userNavCtrl">
             <ul id="nav-user-off" class="nav navbar-nav" ng-if="!loggedIn">
                 <li class="light-blue2">
                     <a href="#login">
@@ -86,7 +86,7 @@
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="" ng-click="logOut()">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -176,6 +176,7 @@
 <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 
 <!-- Nourriture scripts -->
+<script type="text/javascript" src="js/services/userService.js"></script>
 <script type="text/javascript" src="js/controllers/mainCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/userCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/recipesCtrl.js"></script>
