@@ -36,12 +36,29 @@ userServices.factory('UserService', ['$rootScope', '$http',
                 });
         };
 
-        // Log Out (Basically just delete session and mark as logged out, no need to tell platform)
+        // Log Out
         api.logOut = function(callback) {
-            api.isLoggedIn = false;
-            api.currentUsername = "";
-            $rootScope.$broadcast("user:loginStateChanged", api);
-            callback();
+            $http.get(host + "/logout").
+                success(function(data, status, headers, config) {
+                    if(status == 200) {
+                        // Update login state
+                        api.isLoggedIn = false;
+                        api.currentUsername = "";
+                        // Broadcast state change
+                        $rootScope.$broadcast("user:loginStateChanged", api);
+                        // Return
+                        callback();
+                    } else {
+                        callback(status);
+                    }
+                })
+                .error(function(data, status, headers, config) {
+                    if(status == 0) {
+                        callback(-1);
+                    } else {
+                        callback(status);
+                    }
+                });
         };
 
         return api;
