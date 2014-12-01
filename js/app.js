@@ -13,6 +13,10 @@ app.config(["$routeProvider",
                 templateUrl: "/partials/frontpage.html",
                 controller: "mainCtrl"
             }).
+            when('/login', {
+                templateUrl: "/partials/login.html",
+                controller: "userCtrl"
+            }).
             when('/recipes', {
                 templateUrl: "/partials/recipes.html",
                 controller: "recipesCtrl"
