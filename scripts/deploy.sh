@@ -12,15 +12,16 @@ scp nourriture-webapp-0.1.*.zip training:/srv/$ENVIRONMENT/nourriture-webapp.zip
 ssh training <<EOF
   cd /srv/$ENVIRONMENT/
 
-  forever stop $ENVIRONMENT
   rm -f -r nourriture-webapp-*
 
   unzip -o *.zip
   cd nourriture-webapp-*
   mv nourriture-webapp/ ../nourriture-webapp
+  de ../nourriture-webapp
 
   bower install
-  cp ../config.json config.json
+
+  cp ../config.js config.js
 
   exit
 EOF
