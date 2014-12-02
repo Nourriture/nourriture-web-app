@@ -10,8 +10,9 @@ rm -r build
 mkdir build
 mkdir build/$PK_NAME
 
-# Copy source files
+# Copy source files ( TODO: Combine and minify js/css )
 cp index.html build/$PK_NAME/index.html
+cp config.js build/$PK_NAME/config.js
 cp -r js build/$PK_NAME/js
 cp -r css build/$PK_NAME/css
 cp -r img build/$PK_NAME/img
