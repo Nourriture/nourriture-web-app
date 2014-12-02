@@ -13,6 +13,7 @@ ssh training <<EOF
   cd /srv/$ENVIRONMENT/
 
   rm -f -r nourriture-webapp-*
+  rm -f -r nourriture-webapp
 
   unzip -o *.zip
   cd nourriture-webapp-*
