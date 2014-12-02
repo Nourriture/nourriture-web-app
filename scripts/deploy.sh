@@ -17,7 +17,7 @@ ssh training <<EOF
   unzip -o *.zip
   cd nourriture-webapp-*
   mv nourriture-webapp/ ../nourriture-webapp
-  de ../nourriture-webapp
+  cd ../nourriture-webapp
 
   bower install
 
