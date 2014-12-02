@@ -12,18 +12,11 @@ scp nourriture-webapp-0.1.*.zip training:/srv/$ENVIRONMENT/nourriture-webapp.zip
 ssh training <<EOF
   cd /srv/$ENVIRONMENT/
 
-  rm -f -r nourriture-webapp-*
   rm -f -r nourriture-webapp
 
   unzip -o *.zip
-  cd nourriture-webapp-*
-  mv nourriture-webapp/ ../nourriture-webapp
-  cd ../nourriture-webapp
 
-  npm install
-  npm dedupe
-
-  cp ../config.js config.js
+  cp config.js nourriture-webapp/config.js
 
   exit
 EOF

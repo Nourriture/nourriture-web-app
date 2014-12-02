@@ -36,3 +36,7 @@ bower_components
 
 # Build output
 build/
+dist/
+
+# Grunt temporary files
+.tmp/
