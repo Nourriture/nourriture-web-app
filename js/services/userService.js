@@ -2,10 +2,10 @@
  * Created by niels on 12/1/14.
  */
 
-var userServices = angular.module('userServices', []);
+var userServices = angular.module('userServices', ["nourConfig"]);
 
-userServices.factory('UserService', ['$rootScope', '$http',
-    function($rootScope, $http){
+userServices.factory('UserService', ['$rootScope', '$http', 'config',
+    function($rootScope, $http, config){
         var api = {
             isLoggedIn: false, // TODO: Make sure to update isLoggedIn upon instantiation (incase user has existing session upon page load)
             currentUsername: null
@@ -13,7 +13,7 @@ userServices.factory('UserService', ['$rootScope', '$http',
 
         // Attempt to log in to Nourriture platform
         api.logIn = function(credentials, callback) {
-            $http.post(host + "/login", credentials).
+            $http.post(config.BE_HOST + "/login", credentials).
                 success(function(data, status, headers, config) {
                     if(status == 200) {
                         // Update login state
@@ -38,7 +38,7 @@ userServices.factory('UserService', ['$rootScope', '$http',
 
         // Log Out
         api.logOut = function(callback) {
-            $http.get(host + "/logout").
+            $http.get(config.BE_HOST + "/logout").
                 success(function(data, status, headers, config) {
                     if(status == 200) {
                         // Update login state

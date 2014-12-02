@@ -6,8 +6,6 @@
  */
 
 var ctrls = angular.module('nourControllers', []);
-var host = "http://localhost:2121";
-//var host = "http://dev.9la.dk/platform";
 
 ctrls.controller("mainCtrl", ['$scope', '$http', function ($scope, $http) {
     // Application state
