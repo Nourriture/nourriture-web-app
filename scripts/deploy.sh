@@ -20,7 +20,8 @@ ssh training <<EOF
   mv nourriture-webapp/ ../nourriture-webapp
   cd ../nourriture-webapp
 
-  bower install
+  npm install
+  npm dedupe
 
   cp ../config.js config.js
 
