@@ -4,7 +4,7 @@
  * Main Angular script file for application
  */
 
-var app = angular.module('nourWebApp', ["ngRoute", "nourControllers", "userServices"]);
+var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourControllers", "userServices", "recipeServices"]);
 
 app.config(["$routeProvider", "$httpProvider",
     function ($routeProvider, $httpProvider) {

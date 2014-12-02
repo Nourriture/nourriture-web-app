@@ -1,5 +1,14 @@
 <div class="main-container container" id="main-container">
     <div>
         <p class="lead">Here goes <strong>recipes!</strong></p>
+        <div>
+            <ul ng-if="!loaderror">
+                <li ng-repeat="recipe in recipes">
+                    <strong>{{ recipe.title }}</strong>
+                    <p>{{ recipe.description }}</p>
+                </li>
+            </ul>
+            <p ng-if="loaderror">Failed to load recipes...</p>
+        </div>
     </div>
 </div>
