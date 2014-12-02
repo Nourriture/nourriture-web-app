@@ -33,3 +33,6 @@ node_modules
 # Libraries installed by Bower
 bower/
 bower_components
+
+# Build output
+build/
