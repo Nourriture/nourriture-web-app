@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Package name (name of outputted archieve)
-PK_NAME=nourriture-0.1.${BUILD_NUMBER}
+PK_NAME=nourriture-webapp-0.1.${BUILD_NUMBER}
 
 # Clean up any old build
 rm -r build
