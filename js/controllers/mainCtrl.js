@@ -12,21 +12,4 @@ var host = "http://localhost:2121";
 ctrls.controller("mainCtrl", ['$scope', '$http', function ($scope, $http) {
     // Application state
     $scope.name = "World";
-    $scope.ingredients = [];
-    $scope.loaderror = false;
-
-    // Get ingredients
-    $http.get(host + "/ingredient")
-        .then(
-            // Success
-            function (res) {
-                $scope.loaderror = false;
-                $scope.ingredients = res.data;
-            },
-            // Failure
-            function (res) {
-                $scope.loaderror = true;
-                console.log("Failed to retrieve ingredients");
-            }
-        );
 }]);

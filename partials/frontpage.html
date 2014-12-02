@@ -37,18 +37,5 @@
                 <input type="text" ng-model="name" />
             </p>
         </div>
-
-        <div>
-            <ul ng-if="!loaderror">
-                <li ng-repeat="ingredient in ingredients">
-                    <strong>{{ ingredient.name }}</strong>
-                    <p>Calories: {{ ingredient.calories }},
-                        Carbs: {{ingredient.carbs }},
-                        Protein: {{ingredient.protein }},
-                        Fat: {{ ingredient.fat}}</p>
-                </li>
-            </ul>
-            <p ng-if="loaderror">Failed to load ingredients...</p>
-        </div>
     </div>
 </div>
