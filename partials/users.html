@@ -1,0 +1,132 @@
+<div class="main-container container" id="main-container">
+    <div>
+        <div class="page-header">
+            <h1>Users</h1>
+        </div>
+        <table id="users-table" class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+                <th class="center">
+                    <label class="position-relative">
+                        <input type="checkbox" class="ace">
+                        <span class="lbl"></span>
+                    </label>
+                </th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th class="hidden-sm hidden-xs">Joined</th>
+                <th class="hidden-sm hidden-xs">Updated</th>
+                <th>Role</th>
+                <th class="hidden-xs"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr>
+                <td class="center">
+                    <label class="position-relative">
+                        <input type="checkbox" class="ace">
+                        <span class="lbl"></span>
+                    </label>
+                </td>
+
+                <td>bob</td>
+                <td>bob@example.com</td>
+                <td class="text-muted">(hidden)</td>
+                <td class="hidden-sm hidden-xs">2014 Apr 12</td>
+                <td class="hidden-sm hidden-xs">2014 Feb 12</td>
+
+                <td>
+                    <!--<span class="label label-sm">Deactivated</span>
+                    <span class="label label-sm label-inverse">Company</span>
+                    <span class="label label-sm label-success">Gastronomist</span>-->
+                    <span class="label label-md label-yellow">Admin</span>
+                </td>
+
+                <td class="hidden-xs">
+                    <div class="btn-group">
+                        <button class="btn btn-xs btn-primary">
+                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                        </button>
+
+                        <button class="btn btn-xs btn-danger">
+                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="center">
+                    <label class="position-relative">
+                        <input type="checkbox" class="ace">
+                        <span class="lbl"></span>
+                    </label>
+                </td>
+
+                <td><input type="text" value="john" /></td>
+                <td><input type="text" value="bob@example.com" /></td>
+                <td class="text-muted"><input type="password" value="hidden" /></td>
+                <td class="hidden-sm hidden-xs">2014 Apr 12</td>
+                <td class="hidden-sm hidden-xs">2014 Feb 12</td>
+
+                <td>
+                    <div class="btn-group">
+                        <button data-toggle="dropdown" class="btn btn-inverse btn-sm dropdown-toggle" aria-expanded="false">
+                            <span>Company</span>
+                            <span class="ace-icon fa fa-caret-down icon-on-right"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-info dropdown-menu-right">
+                            <li>
+                                <a href="">Deactivated</a>
+                            </li>
+                            <li>
+                                <a href="">Gastronomist</a>
+                            </li>
+
+                            <li>
+                                <a href="">Company</a>
+                            </li>
+                            <li>
+                                <a href="">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+
+                <td class="hidden-xs">
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-success">
+                            <i class="ace-icon fa fa-check bigger-120"></i>
+                        </button>
+
+                        <button class="btn btn-sm btn-light">
+                            <i class="ace-icon fa fa-close bigger-120"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <div class="clearfix bottom-button-group">
+            <button type="button" class="pull-right btn btn-sm btn-danger">
+                <i class="ace-icon fa fa-trash"></i>
+                <span class="bigger-110">Delete User</span>
+            </button>
+
+            <button type="button" class="pull-right btn btn-sm btn-primary">
+                <i class="ace-icon fa fa-pencil"></i>
+                <span class="bigger-110">Edit User</span>
+            </button>
+
+            <button type="button" class="pull-right btn btn-sm btn-success">
+                <i class="ace-icon fa fa-plus"></i>
+                <span class="bigger-110">Create User</span>
+            </button>
+        </div>
+    </div>
+</div>
