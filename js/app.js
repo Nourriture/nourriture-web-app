@@ -19,6 +19,10 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/login.html",
                 controller: "loginCtrl"
             }).
+            when('/users', {
+                templateUrl: "/partials/users.html",
+                controller: "userCtrl"
+            }).
             when('/recipes', {
                 templateUrl: "/partials/recipes.html",
                 controller: "recipesCtrl"

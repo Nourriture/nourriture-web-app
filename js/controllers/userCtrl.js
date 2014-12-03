@@ -45,3 +45,8 @@ ctrls.controller("userNavCtrl", ['$scope', "$location", 'UserService', function 
         });
     }
 }]);
+
+// "Manage users" page
+ctrls.controller("usersCtrl", ['$scope', "$location", 'UserService', function ($scope, $location, UserService) {
+    // TODO: Implement
+}]);

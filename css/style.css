@@ -24,6 +24,14 @@
     border-radius: 0;
 }
 
+.bottom-button-group > button {
+    margin-left: 5px;
+}
+
+#users-table input {
+    width: 100%
+}
+
 .tooltip-primary + .tooltip > .tooltip-inner,
 .tooltip.tooltip-primary > .tooltip-inner {
     background-color: rgb(27, 106, 170);
