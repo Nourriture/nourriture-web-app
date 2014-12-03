@@ -24,6 +24,9 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
             }
         });
     };
+
+    // jQuery junk for bootstrap
+    $('.login-using-tooltip').tooltip();
 }]);
 
 // User menu in top navigation bar
