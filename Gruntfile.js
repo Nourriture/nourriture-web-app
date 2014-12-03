@@ -13,7 +13,7 @@ module.exports = function(grunt) {
             },
             fonts: {
                 expand: true,
-                src: ['css/ace/fonts/*', 'node_modules/font-awesome/fonts/*'],
+                src: ['css/fonts/*', 'node_modules/font-awesome/fonts/*'],
                 dest: 'dist/package/fonts/',
                 flatten: true,
                 filter: 'isFile'
