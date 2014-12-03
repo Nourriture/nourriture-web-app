@@ -8,8 +8,15 @@
     width: 220px;
 }
 
-#main-container>div {
-    padding: 48px 60px 48px 60px;
+@media (max-width: 991px) {
+    #main-container>div {
+        padding: 24px 30px 24px 30px;
+    }
+}
+@media (min-width: 991px) {
+    #main-container>div {
+        padding: 48px 60px 48px 60px;
+    }
 }
 
 #main-container > .jumbotron {
