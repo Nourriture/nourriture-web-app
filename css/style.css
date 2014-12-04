@@ -32,6 +32,15 @@
     width: 100%
 }
 
+#users-table .editing {
+    background-color: #F5F5F5;
+}
+
+#user-delete-confirm .deleted {
+    color: #777777;
+    text-decoration: line-through;
+}
+
 .tooltip-primary + .tooltip > .tooltip-inner,
 .tooltip.tooltip-primary > .tooltip-inner {
     background-color: rgb(27, 106, 170);

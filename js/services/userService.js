@@ -2,8 +2,21 @@
  * Created by niels on 12/1/14.
  */
 
-var userServices = angular.module('userServices', ["nourConfig"]);
+var userServices = angular.module('userServices', ['ngResource', "nourConfig"]);
 
+// User object(s)
+userServices.factory('User', ['$resource', 'config',
+    function ($resource, config) {
+        return $resource(config.BE_HOST + '/user/:username', {}, {
+            update: {
+                method:'PUT',
+                url:config.BE_HOST + '/user/:username'
+            }
+        });
+    }]
+);
+
+// Utilities for manipulating and reading login state
 userServices.factory('UserService', ['$rootScope', '$http', 'config',
     function($rootScope, $http, config){
         var api = {

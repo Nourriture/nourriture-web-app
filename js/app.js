@@ -21,7 +21,7 @@ app.config(["$routeProvider", "$httpProvider",
             }).
             when('/users', {
                 templateUrl: "/partials/users.html",
-                controller: "userCtrl"
+                controller: "manageUsersCtrl"
             }).
             when('/recipes', {
                 templateUrl: "/partials/recipes.html",

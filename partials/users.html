@@ -24,85 +24,62 @@
 
             <tbody>
 
-            <tr>
+            <tr ng-repeat="user in users" ng-class="{editing: cur.model.username == user.model.username}">
                 <td class="center">
                     <label class="position-relative">
-                        <input type="checkbox" class="ace">
+                        <input ng-model="user.checked" ng-click="checkedChanged()" type="checkbox" class="ace">
                         <span class="lbl"></span>
                     </label>
                 </td>
 
-                <td>bob</td>
-                <td>bob@example.com</td>
-                <td class="text-muted">(hidden)</td>
-                <td class="hidden-sm hidden-xs">2014 Apr 12</td>
-                <td class="hidden-sm hidden-xs">2014 Feb 12</td>
-
+                <td>{{ user.model.username }}</td>
                 <td>
-                    <!--<span class="label label-sm">Deactivated</span>
-                    <span class="label label-sm label-inverse">Company</span>
-                    <span class="label label-sm label-success">Gastronomist</span>-->
-                    <span class="label label-md label-yellow">Admin</span>
+                    <span ng-if="cur.model.username != user.model.username">{{ user.model.email }}</span>
+                    <input ng-if="cur.model.username == user.model.username" type="text" ng-model="user.model.email" />
                 </td>
 
-                <td class="hidden-xs">
+                <td class="text-muted">
+                    <span ng-if="cur.model.username != user.model.username">(encrypted)</span>
+                    <span><input ng-if="cur.model.username == user.model.username" type="password" ng-model="user.model.password" placeholder="(new password)" /></span>
+                </td>
+
+                <td class="hidden-sm hidden-xs">{{ user.model.created|formatDate:"Mo MMM YYYY" }}</td>
+
+                <td class="hidden-sm hidden-xs">{{ user.model.modified|fromNow }}</td>
+
+                <td ng-if="cur.model.username != user.model.username" ng-switch="user.model.role">
+                    <span ng-switch-when="raw" class="label label-md">Deactivated</span>
+                    <span ng-switch-when="comp" class="label label-md label-inverse">Company</span>
+                    <span ng-switch-when="gastro" class="label label-md label-success">Gastronomist</span>
+                    <span ng-switch-when="admin" class="label label-md label-yellow">Admin</span>
+                </td>
+                <td ng-if="cur.model.username == user.model.username">
+                    <select ng-model="user.model.role">
+                        <option value="raw">Deactivated</option>
+                        <option value="comp">Company</option>
+                        <option value="gastro">Gastronomist</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </td>
+
+                <td ng-if="cur.model.username != user.model.username" class="hidden-xs">
                     <div class="btn-group">
-                        <button class="btn btn-xs btn-primary">
+                        <button class="btn btn-xs btn-primary" ng-click="startEdit(user)">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </button>
 
-                        <button class="btn btn-xs btn-danger">
+                        <button class="btn btn-xs btn-danger" ng-click="startDelete(user)">
                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                         </button>
                     </div>
                 </td>
-            </tr>
-
-            <tr>
-                <td class="center">
-                    <label class="position-relative">
-                        <input type="checkbox" class="ace">
-                        <span class="lbl"></span>
-                    </label>
-                </td>
-
-                <td><input type="text" value="john" /></td>
-                <td><input type="text" value="bob@example.com" /></td>
-                <td class="text-muted"><input type="password" value="hidden" /></td>
-                <td class="hidden-sm hidden-xs">2014 Apr 12</td>
-                <td class="hidden-sm hidden-xs">2014 Feb 12</td>
-
-                <td>
+                <td ng-if="cur.model.username == user.model.username" class="hidden-xs">
                     <div class="btn-group">
-                        <button data-toggle="dropdown" class="btn btn-inverse btn-sm dropdown-toggle" aria-expanded="false">
-                            <span>Company</span>
-                            <span class="ace-icon fa fa-caret-down icon-on-right"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-info dropdown-menu-right">
-                            <li>
-                                <a href="">Deactivated</a>
-                            </li>
-                            <li>
-                                <a href="">Gastronomist</a>
-                            </li>
-
-                            <li>
-                                <a href="">Company</a>
-                            </li>
-                            <li>
-                                <a href="">Admin</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-
-                <td class="hidden-xs">
-                    <div class="btn-group">
-                        <button class="btn btn-sm btn-success">
+                        <button class="btn btn-sm btn-success" ng-click="attemptSave(user)">
                             <i class="ace-icon fa fa-check bigger-120"></i>
                         </button>
 
-                        <button class="btn btn-sm btn-light">
+                        <button class="btn btn-sm btn-light" ng-click="discardEdits()">
                             <i class="ace-icon fa fa-close bigger-120"></i>
                         </button>
                     </div>
@@ -113,20 +90,65 @@
         </table>
 
         <div class="clearfix bottom-button-group">
-            <button type="button" class="pull-right btn btn-sm btn-danger">
+            <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="checkedCount > 0 && !cur" ng-click="startDelete()">
                 <i class="ace-icon fa fa-trash"></i>
-                <span class="bigger-110">Delete User</span>
+                <span class="bigger-110">
+                    <span ng-if="checkedCount == 1">Delete User</span>
+                    <span ng-if="checkedCount > 1">Delete Users</span>
+                </span>
             </button>
 
-            <button type="button" class="pull-right btn btn-sm btn-primary">
+            <button type="button" class="pull-right btn btn-sm btn-primary" ng-if="checkedCount == 1 && !cur" ng-click="startEdit()">
                 <i class="ace-icon fa fa-pencil"></i>
                 <span class="bigger-110">Edit User</span>
             </button>
 
-            <button type="button" class="pull-right btn btn-sm btn-success">
+            <button type="button" class="pull-right btn btn-sm btn-light" ng-if="cur" ng-click="discardEdits()">
+                <i class="ace-icon fa fa-close"></i>
+                <span class="bigger-110">Abort</span>
+            </button>
+
+            <button type="button" class="pull-right btn btn-sm btn-success" ng-if="cur" ng-click="attemptSave()">
+                <i class="ace-icon fa fa-check"></i>
+                <span class="bigger-110">Confirm</span>
+            </button>
+
+            <button type="button" class="pull-right btn btn-sm btn-success" ng-if="!cur && !checkedCount">
                 <i class="ace-icon fa fa-plus"></i>
                 <span class="bigger-110">Create User</span>
             </button>
         </div>
     </div>
+
+    <div id="user-delete-confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Deletion</h2>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Are you sure you wish to delete?</p>
+                    <p>If you confirm, the following user(s) will be deleted permanently:</p>
+                    <ul>
+                        <li ng-repeat="user in deleting">
+                            <span ng-class="{deleted: user.deleted}">{{ user.model.username}} ({{ user.model.email }})&nbsp;</span>
+                            <i ng-if="user.deleted" class="ace-icon fa fa-check text-muted"></i>
+                            <span ng-if="user.deleteFailed" class="text-danger">...failed to delete, try again.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="ace-icon fa fa-mail-reply"></i>
+                        <span>Abort</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" ng-click="attemptDelete()">
+                        <i class="ace-icon fa fa-exclamation-circle"></i>
+                       <span>Yes, delete!</span>
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
