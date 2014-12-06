@@ -32,18 +32,27 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
 // User menu in top navigation bar
 ctrls.controller("userNavCtrl", ['$scope', "$location", 'UserService', function ($scope, $location, UserService) {
     $scope.loggedIn = UserService.isLoggedIn;
-    $scope.username = UserService.currentUsername;
+
+    if($scope.loggedIn) {
+        $scope.username = UserService.user.username;
+    }
 
     $scope.$on("user:loginStateChanged", function(event, data) {
         $scope.loggedIn = data.isLoggedIn;
-        $scope.username = data.currentUsername;
+        if($scope.loggedIn) {
+            $scope.username = data.user.username;
+        } else {
+            $scope.username = "";
+        }
     });
 
     $scope.logOut = function() {
         UserService.logOut(function() {
             $location.path("/"); // Navigate to front page
         });
-    }
+    };
+
+    UserService.refreshLoginState();
 }]);
 
 // "Manage users" page

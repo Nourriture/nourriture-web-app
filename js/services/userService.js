@@ -21,7 +21,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
     function($rootScope, $http, config){
         var api = {
             isLoggedIn: false, // TODO: Make sure to update isLoggedIn upon instantiation (incase user has existing session upon page load)
-            currentUsername: null
+            user: null
         };
 
         // Attempt to log in to Nourriture platform
@@ -31,7 +31,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                     if(status == 200) {
                         // Update login state
                         api.isLoggedIn = true;
-                        api.currentUsername = credentials.username;
+                        api.user = data;
                         // Broadcast state change
                         $rootScope.$broadcast("user:loginStateChanged", api);
                         // Return
@@ -56,7 +56,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                     if(status == 200) {
                         // Update login state
                         api.isLoggedIn = false;
-                        api.currentUsername = "";
+                        api.user = null;
                         // Broadcast state change
                         $rootScope.$broadcast("user:loginStateChanged", api);
                         // Return
@@ -71,6 +71,23 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                     } else {
                         callback(status);
                     }
+                });
+        };
+
+        // Attempt to log in to Nourriture platform
+        api.refreshLoginState = function() {
+            $http.get(config.BE_HOST + "/isloggedin").
+                success(function(data, status, headers, config) {
+                    if(status == 200) {
+                        // Update login state
+                        api.isLoggedIn = true;
+                        api.user = data;
+                        // Broadcast state change
+                        $rootScope.$broadcast("user:loginStateChanged", api);
+                    }
+                })
+                .error(function(data, status, headers, config) {
+                    console.log("Session probably just expired. That's okay, you can just log in again");
                 });
         };
 
