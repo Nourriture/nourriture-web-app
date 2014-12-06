@@ -75,7 +75,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
         };
 
         // Attempt to log in to Nourriture platform
-        api.refreshLoginState = function() {
+        api.refreshLoginState = function(callback) {
             $http.get(config.BE_HOST + "/isloggedin").
                 success(function(data, status, headers, config) {
                     if(status == 200) {
@@ -84,10 +84,17 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                         api.user = data;
                         // Broadcast state change
                         $rootScope.$emit("user:loginStateChanged", api);
+                        callback();
+                    } else {
+                        callback(status);
                     }
                 })
                 .error(function(data, status, headers, config) {
-                    console.log("Session probably just expired. That's okay, you can just log in again");
+                    if(status == 0) {
+                        callback(-1);
+                    } else {
+                        callback(status);
+                    }
                 });
         };
 
