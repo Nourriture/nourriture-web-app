@@ -20,7 +20,7 @@ userServices.factory('User', ['$resource', 'config',
 userServices.factory('UserService', ['$rootScope', '$http', 'config',
     function($rootScope, $http, config){
         var api = {
-            isLoggedIn: false, // TODO: Make sure to update isLoggedIn upon instantiation (incase user has existing session upon page load)
+            isLoggedIn: false,
             user: null
         };
 
