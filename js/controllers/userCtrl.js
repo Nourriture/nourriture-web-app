@@ -109,7 +109,7 @@ ctrls.controller("manageUsersCtrl", ['$scope', "$location", 'User', function ($s
             user = $scope.checkedUsers[0];
         }
 
-        User.update({username:user.username}, user,
+        User.update({username:user.model.username}, user.model,
             function(resp) {
                 $scope.cur = null;
             },
