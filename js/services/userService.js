@@ -84,16 +84,16 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                         api.user = data;
                         // Broadcast state change
                         $rootScope.$emit("user:loginStateChanged", api);
-                        callback();
+                        if(callback) callback();
                     } else {
-                        callback(status);
+                        if(callback) callback(status);
                     }
                 })
                 .error(function(data, status, headers, config) {
                     if(status == 0) {
-                        callback(-1);
+                        if(callback) callback(-1);
                     } else {
-                        callback(status);
+                        if(callback) callback(status);
                     }
                 });
         };
