@@ -63,7 +63,7 @@
                         <img class="nav-user-photo" src="img/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
-									{{ username }}
+									{{ user.username }}
 								</span>
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a>
@@ -85,6 +85,15 @@
                         </li>
 
                         <li class="divider"></li>
+
+                        <li ng-if="user.role == 'admin'">
+                            <a href="#/users">
+                                <i class="ace-icon fa fa-users"></i>
+                                Manage Users
+                            </a>
+                        </li>
+
+                        <li ng-if="user.role == 'admin'" class="divider"></li>
 
                         <li>
                             <a href="" ng-click="logOut()">
