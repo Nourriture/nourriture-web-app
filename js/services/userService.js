@@ -49,7 +49,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                 });
         };
 
-        // Log Out
+        // Attempt to log out of Nourriture platform
         api.logOut = function(callback) {
             $http.get(config.BE_HOST + "/logout").
                 success(function(data, status, headers, config) {
@@ -74,7 +74,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                 });
         };
 
-        // Attempt to log in to Nourriture platform
+        // Attempt to refresh login state (i.e login automatically with cookie, if we have a session)
         api.refreshLoginState = function(callback) {
             $http.get(config.BE_HOST + "/isloggedin").
                 success(function(data, status, headers, config) {
