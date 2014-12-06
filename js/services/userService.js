@@ -33,7 +33,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                         api.isLoggedIn = true;
                         api.user = data;
                         // Broadcast state change
-                        $rootScope.$broadcast("user:loginStateChanged", api);
+                        $rootScope.$emit("user:loginStateChanged", api);
                         // Return
                         callback();
                     } else {
@@ -58,7 +58,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                         api.isLoggedIn = false;
                         api.user = null;
                         // Broadcast state change
-                        $rootScope.$broadcast("user:loginStateChanged", api);
+                        $rootScope.$emit("user:loginStateChanged", api);
                         // Return
                         callback();
                     } else {
@@ -83,7 +83,7 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
                         api.isLoggedIn = true;
                         api.user = data;
                         // Broadcast state change
-                        $rootScope.$broadcast("user:loginStateChanged", api);
+                        $rootScope.$emit("user:loginStateChanged", api);
                     }
                 })
                 .error(function(data, status, headers, config) {

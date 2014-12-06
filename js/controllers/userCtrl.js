@@ -37,7 +37,7 @@ ctrls.controller("userNavCtrl", ['$scope', "$location", 'UserService', function 
         $scope.username = UserService.user.username;
     }
 
-    $scope.$on("user:loginStateChanged", function(event, data) {
+    $rootScope.$on("user:loginStateChanged", function(event, data) {
         $scope.loggedIn = data.isLoggedIn;
         if($scope.loggedIn) {
             $scope.username = data.user.username;
