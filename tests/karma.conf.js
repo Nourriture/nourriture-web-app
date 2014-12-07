@@ -10,6 +10,12 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    //
+    // useful links to current frameworks:
+    //  * Mocha         http://mochajs.org/#getting-started
+    //  * Chai          http://chaijs.com/api/bdd/
+    //  * Sinon         http://sinonjs.org/docs/
+    //  * Sinon-chai    https://www.npmjs.org/package/karma-chai-sinon
     frameworks: ['mocha', 'chai-sinon'],
 
 
