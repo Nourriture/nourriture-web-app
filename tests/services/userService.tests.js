@@ -13,7 +13,7 @@ describe("Test UserService (login/logout)", function() {
     beforeEach(angular.mock.inject(function($injector) {
         // Retrieve root scope so we can spy on events
         $rootScope = $injector.get('$rootScope');
-        spyOn($rootScope, '$emit').and.callThrough();
+        sinon.spy($rootScope, '$emit');
 
         // Make sure host configuration is set correctly
         config = $injector.get("config");
@@ -58,10 +58,9 @@ describe("Test UserService (login/logout)", function() {
             .respond(200, serverUser);
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(serverUser);
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(serverUser);
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -77,10 +76,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(serverUser);
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(status).to.be.undefined();
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(serverUser);
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -92,10 +91,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(401);
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -110,10 +109,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -124,10 +123,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(500);
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -142,10 +141,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -156,10 +155,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(0);
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -174,10 +173,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logIn({ username:"john", password:"secret"}, function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -205,10 +204,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(200);
 
         UserService.logOut(function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(status).to.be.undefined();
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -223,10 +222,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logOut(function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(status).to.be.undefined();
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -238,10 +237,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(401);
 
         UserService.logOut(function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -256,10 +255,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logOut(function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -270,10 +269,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(500);
 
         UserService.logOut(function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -288,10 +287,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logOut(function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -302,10 +301,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(0);
 
         UserService.logOut(function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -320,10 +319,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.logOut(function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -354,10 +353,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(200, serverUser);
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(serverUser);
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(status).to.be.undefined();
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(serverUser);
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -373,10 +372,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBeUndefined();
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(serverUser);
-            expect($rootScope.$emit).toHaveBeenCalledWith("user:loginStateChanged", UserService);
+            expect(status).to.be.undefined();
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(serverUser);
+            expect($rootScope.$emit).to.have.been.calledWith("user:loginStateChanged", UserService);
 
             done();
         });
@@ -388,10 +387,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(401);
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -406,10 +405,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(401);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(401);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -420,10 +419,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(500);
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -438,10 +437,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(500);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(500);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -452,10 +451,10 @@ describe("Test UserService (login/logout)", function() {
             .respond(0);
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(false);
-            expect(UserService.user).toBeFalsy();
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.false();
+            expect(UserService.user).to.not.be.ok();
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
@@ -470,10 +469,10 @@ describe("Test UserService (login/logout)", function() {
         UserService.isLoggedIn = true;
 
         UserService.refreshLoginState(function(status) {
-            expect(status).toBe(-1);
-            expect(UserService.isLoggedIn).toBe(true);
-            expect(UserService.user).toEqual(userBob);
-            expect($rootScope.$emit).not.toHaveBeenCalled();
+            expect(status).to.equal(-1);
+            expect(UserService.isLoggedIn).to.be.true();
+            expect(UserService.user).to.eql(userBob);
+            expect($rootScope.$emit).to.have.been.callCount(0);
             done();
         });
 
