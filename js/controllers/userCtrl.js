@@ -12,15 +12,20 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
             if(!errorCode) {
                 $location.path('/'); // Success! Navigate to front page
             } else {
-                if(errorCode == 401) {
-                    // Invalid credentials
-                    $scope.credentials.password = "";
-                    $scope.error = "Invalid"
-                } else {
-                    // Any other error
-                    $scope.error = "Unexpected"
+                switch(errorCode) {
+                    case 401:
+                        // Invalid credentials
+                        $scope.credentials.password = "";
+                        $scope.error = "Invalid";
+                        break;
+                    case -1:
+                        // Connection refused
+                        $scope.error = "Connection";
+                        break;
+                    default:
+                        // Any other error
+                        $scope.error = "Unexpected"
                 }
-                console.log("Login failed");
             }
         });
     };

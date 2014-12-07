@@ -8,7 +8,7 @@
 
                 <div class="space-6"></div>
 
-                <div class="alert alert-danger" ng-if="error == 'Invalid'">
+                <div id="alertInvalidCredentials" class="alert alert-danger" ng-if="error == 'Invalid'">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="ace-icon fa fa-times"></i>
                     </button><strong>
@@ -18,7 +18,7 @@
                     <span>Those credentials are not valid, try again.</span>
                 </div>
 
-                <div class="alert alert-danger" ng-if="error == 'Unexpected'">
+                <div id="alertUnexpectedError" class="alert alert-danger" ng-if="error == 'Unexpected'">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="ace-icon fa fa-times"></i>
                     </button><strong>
@@ -26,6 +26,16 @@
                     <span>Sorry!</span>
                 </strong>
                     <span>An error occured. We are working to resolve the issue.</span>
+                </div>
+
+                <div id="alertConncetionIssues" class="alert alert-warning" ng-if="error == 'Connection'">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button><strong>
+                    <i class="ace-icon fa fa-times"></i>
+                    <span>Hello?</span>
+                </strong>
+                    <span>Could not contact Nourriture. Check your connection and try again.</span>
                 </div>
 
                 <form>
@@ -53,7 +63,7 @@
                                 <span class="lbl"> Remember Me</span>
                             </label>
 
-                            <button type="button"  ng-click="attemptLogin(credentials)" class="width-35 pull-right btn btn-sm btn-info">
+                            <button id="buttonLogin" type="button"  ng-click="attemptLogin(credentials)" class="width-35 pull-right btn btn-sm btn-info">
                                 <i class="ace-icon fa fa-key"></i>
                                 <span class="bigger-110">Login</span>
                             </button>
