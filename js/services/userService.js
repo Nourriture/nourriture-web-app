@@ -28,17 +28,15 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
         api.logIn = function(credentials, callback) {
             $http.post(config.BE_HOST + "/login", credentials).
                 success(function(data, status, headers, config) {
-                    if(status == 200) {
-                        // Update login state
-                        api.isLoggedIn = true;
-                        api.user = data;
-                        // Broadcast state change
-                        $rootScope.$emit("user:loginStateChanged", api);
-                        // Return
-                        callback();
-                    } else {
-                        callback(status);
-                    }
+                    // Update login state
+                    api.isLoggedIn = true;
+                    api.user = data;
+
+                    // Broadcast state change
+                    $rootScope.$emit("user:loginStateChanged", api);
+
+                    // Return
+                    callback();
                 })
                 .error(function(data, status, headers, config) {
                     if(status == 0) {
@@ -53,17 +51,15 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
         api.logOut = function(callback) {
             $http.get(config.BE_HOST + "/logout").
                 success(function(data, status, headers, config) {
-                    if(status == 200) {
-                        // Update login state
-                        api.isLoggedIn = false;
-                        api.user = null;
-                        // Broadcast state change
-                        $rootScope.$emit("user:loginStateChanged", api);
-                        // Return
-                        callback();
-                    } else {
-                        callback(status);
-                    }
+                    // Update login state
+                    api.isLoggedIn = false;
+                    api.user = null;
+
+                    // Broadcast state change
+                    $rootScope.$emit("user:loginStateChanged", api);
+
+                    // Return
+                    callback();
                 })
                 .error(function(data, status, headers, config) {
                     if(status == 0) {
@@ -78,16 +74,15 @@ userServices.factory('UserService', ['$rootScope', '$http', 'config',
         api.refreshLoginState = function(callback) {
             $http.get(config.BE_HOST + "/isloggedin").
                 success(function(data, status, headers, config) {
-                    if(status == 200) {
-                        // Update login state
-                        api.isLoggedIn = true;
-                        api.user = data;
-                        // Broadcast state change
-                        $rootScope.$emit("user:loginStateChanged", api);
-                        if(callback) callback();
-                    } else {
-                        if(callback) callback(status);
-                    }
+                    // Update login state
+                    api.isLoggedIn = true;
+                    api.user = data;
+
+                    // Broadcast state change
+                    $rootScope.$emit("user:loginStateChanged", api);
+
+                    // Return, if callback provided
+                    if(callback) callback();
                 })
                 .error(function(data, status, headers, config) {
                     if(status == 0) {

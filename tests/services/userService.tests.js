@@ -1,5 +1,7 @@
 /**
  * Created by niels on 12/6/14.
+ *
+ * Unit tests for UserService
  */
 
 
@@ -26,12 +28,17 @@ describe("Test UserService (login/logout)", function() {
         UserService = $injector.get('UserService');
     }));
 
+
     /**
-     *  Server responses tested:
+     *  Tested with following server responses:
      *      200: Success
      *      401: Unauthorized
      *      500: Server error
      *      0:   Connection refused
+     *
+     *  Tested with following states:
+     *      * Already logged In
+     *      * Not logged in
      */
 
 
@@ -46,7 +53,7 @@ describe("Test UserService (login/logout)", function() {
      *
      *  Post-conditions:
      *      * (in callback) "status" is an integer HTTP-code corresponding to serve answer (401, 500 e.g.).
-     *          Unless successful response (200), in which case it is undefined.
+     *          Unless successful response, in which case it is undefined.
      *          Unless connection refused, in which case it is -1.
      *      * (on self) ".loggedIn" should be set to true if successful response was received (otherwise: what it was before)
      *      * (on self) ".user" should be set to the user object received from the server (otherwise: what it was before)
@@ -193,7 +200,7 @@ describe("Test UserService (login/logout)", function() {
      *
      *  Post-conditions:
      *      * (in callback) "status" is an integer HTTP-code corresponding to serve answer (401, 500 e.g.).
-     *          Unless successful response (200), in which case it is undefined.
+     *          Unless successful response, in which case it is undefined.
      *          Unless connection refused, in which case it is -1.
      *      * (on self) ".loggedIn" should be set to false if successful response was received (otherwise: what it was before)
      *      * (on self) ".user" should be set to undefined  (otherwise: what it was before)
@@ -341,7 +348,7 @@ describe("Test UserService (login/logout)", function() {
      *
      *  Post-conditions:
      *      * (in callback) "status" is an integer HTTP-code corresponding to serve answer (401, 500 e.g.).
-     *          Unless successful response (200), in which case it is undefined.
+     *          Unless successful response, in which case it is undefined.
      *          Unless connection refused, in which case it is -1.
      *      * (on self) ".loggedIn" should be set to true if successful response was received (otherwise: what it was before)
      *      * (on self) ".user" should be set to the user object received from the server (otherwise: what it was before)
