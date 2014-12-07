@@ -33,7 +33,7 @@ module.exports = function(config) {
         'js/controllers/mainCtrl.js', // Ensure this is loaded before any other controllers (TODO: Fix the need for this, each controller file should be independent)
         'js/**/*.js',
         'config.js',
-        'tests/**/*.js'
+        'tests/services/**/*.js'
     ],
 
     // list of files to exclude
