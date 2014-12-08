@@ -4,6 +4,8 @@
  * Unit tests for login view and controller
  */
 
+var mocks = require('protractor-http-mock');
+
 describe("Test login view and controller", function() {
 
     /**
@@ -14,17 +16,25 @@ describe("Test login view and controller", function() {
      *      0:   Connection refused
      */
 
+    var mockEndpoints;
+    beforeEach(function() {
+        mockEndpoints = [
+            // Not logged in already
+            {
+                request: {  method: 'GET', path: 'http://localhost:2121/isloggedin' },
+                response: {
+                    status: 401
+                }
+            }
+        ];
+    });
+
+    afterEach(function() {
+        mocks.teardown();
+    });
 
     it('Shows empty login form', function() {
-        browser.addMockModule('httpBackendMock', function() {
-            angular.module('httpBackendMock', ['nourWebApp', 'ngMockE2E'])
-                .run(function($httpBackend) {
-                    $httpBackend.whenGET(/partials\/.*/).passThrough();
-                    $httpBackend.whenGET('http://localhost:2121/isloggedin').respond(function(method, url, data) {
-                        return [200, "", {}];
-                    });
-                });
-        });
+        mocks(mockEndpoints);
 
         browser.get('http://localhost:8080/#/login');
 
@@ -34,18 +44,15 @@ describe("Test login view and controller", function() {
     });
 
     it('Navigates to front page upon successful login', function() {
-        browser.addMockModule('httpBackendMock', function() {
-            angular.module('httpBackendMock', ['nourWebApp', 'ngMockE2E'])
-                .run(function($httpBackend) {
-                    $httpBackend.whenGET(/partials\/.*/).passThrough();
-                    $httpBackend.whenGET('http://localhost:2121/isloggedin').respond(function(method, url, data) {
-                        return [401, "", {}];
-                    });
-                    $httpBackend.whenPOST('http://localhost:2121/login').respond(function(method, url, data) {
-                        return [200, "", { username: "bob", role:"admin" }];
-                    });
-                });
+        mockEndpoints.push({
+            // Successful login
+            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            response: {
+                status: 200,
+                data: { username: "bob", role:"admin" }
+            }
         });
+        mocks(mockEndpoints);
 
         browser.get('http://localhost:8080/#/login');
 
@@ -58,18 +65,14 @@ describe("Test login view and controller", function() {
     });
 
     it('Shows appropriate alert on invalid credentials', function() {
-        browser.addMockModule('httpBackendMock', function() {
-            angular.module('httpBackendMock', ['nourWebApp', 'ngMockE2E'])
-                .run(function($httpBackend) {
-                    $httpBackend.whenGET(/partials\/.*/).passThrough();
-                    $httpBackend.whenGET('http://localhost:2121/isloggedin').respond(function(method, url, data) {
-                        return [401, "", {}];
-                    });
-                    $httpBackend.whenPOST('http://localhost:2121/login').respond(function(method, url, data) {
-                        return [401, "", {}];
-                    });
-                });
+        mockEndpoints.push({
+            // Unauthorized login (invalid credentials)
+            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            response: {
+                status: 401
+            }
         });
+        mocks(mockEndpoints);
 
         browser.get('http://localhost:8080/#/login');
 
@@ -79,21 +82,18 @@ describe("Test login view and controller", function() {
         element(by.css('#buttonLogin')).click();
 
         expect(element(by.css("#alertInvalidCredentials")).isPresent()).toBe(true);
+
     });
 
     it('Shows appropriate alert on unexpected error', function() {
-        browser.addMockModule('httpBackendMock', function() {
-            angular.module('httpBackendMock', ['nourWebApp', 'ngMockE2E'])
-                .run(function($httpBackend) {
-                    $httpBackend.whenGET(/partials\/.*/).passThrough();
-                    $httpBackend.whenGET('http://localhost:2121/isloggedin').respond(function(method, url, data) {
-                        return [401, "", {}];
-                    });
-                    $httpBackend.whenPOST('http://localhost:2121/login').respond(function(method, url, data) {
-                        return [500, "", {}];
-                    });
-                });
+        mockEndpoints.push({
+            // Unexpected error (Internal server error/bug)
+            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            response: {
+                status: 500
+            }
         });
+        mocks(mockEndpoints);
 
         browser.get('http://localhost:8080/#/login');
 
@@ -106,18 +106,14 @@ describe("Test login view and controller", function() {
     });
 
     it('Shows appropriate alert on connection issues', function() {
-        browser.addMockModule('httpBackendMock', function() {
-            angular.module('httpBackendMock', ['nourWebApp', 'ngMockE2E'])
-                .run(function($httpBackend) {
-                    $httpBackend.whenGET(/partials\/.*/).passThrough();
-                    $httpBackend.whenGET('http://localhost:2121/isloggedin').respond(function(method, url, data) {
-                        return [401, "", {}];
-                    });
-                    $httpBackend.whenPOST('http://localhost:2121/login').respond(function(method, url, data) {
-                        return [0, "", {}];
-                    });
-                });
+        mockEndpoints.push({
+            // Connection refused (Client lacks connection or server is offline)
+            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            response: {
+                status: 0
+            }
         });
+        mocks(mockEndpoints);
 
         browser.get('http://localhost:8080/#/login');
 

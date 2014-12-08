@@ -9,5 +9,16 @@ exports.config = {
         'browserName': 'chrome',
         'chromeOptions': { }
         //'args': [ '--verbose --enable-logging --v=1 --log-path=chromedriver.log' ]
+    },
+    /* // Default mocks
+    mocks: {
+        dir: 'mocks',
+        default: ['default']
+    },*/
+    onPrepare: function(){
+        require('protractor-http-mock').config = {
+            rootDirectory: __dirname, // default value: process.cwd()
+            protractorConfig: 'protractor.conf.js' // default value: 'protractor.conf'
+        };
     }
 };
