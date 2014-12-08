@@ -40,3 +40,6 @@ dist/
 
 # Grunt temporary files
 .tmp/
+
+# Test results
+tests/results/
