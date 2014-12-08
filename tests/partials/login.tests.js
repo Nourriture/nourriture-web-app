@@ -6,6 +6,9 @@
 
 var mocks = require('protractor-http-mock');
 
+var frontendRoot = (process.env.FRONTEND_ROOT || 'http://localhost:8080');
+var backendRoot = (process.env.BACKEND_ROOT || 'http://localhost:2121');
+
 describe("Test login view and controller", function() {
 
     /**
@@ -21,7 +24,7 @@ describe("Test login view and controller", function() {
         mockEndpoints = [
             // Not logged in already
             {
-                request: {  method: 'GET', path: 'http://localhost:2121/isloggedin' },
+                request: {  method: 'GET', path: backendRoot + '/isloggedin' },
                 response: {
                     status: 401
                 }
@@ -36,7 +39,7 @@ describe("Test login view and controller", function() {
     it('Shows empty login form', function() {
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         expect(element(by.model('credentials.username')).isPresent()).toBe(true);   // Username input
         expect(element(by.model('credentials.password')).isPresent()).toBe(true);   // Password input
@@ -46,7 +49,7 @@ describe("Test login view and controller", function() {
     it('Navigates to front page upon successful login', function() {
         mockEndpoints.push({
             // Successful login
-            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            request: { method: 'POST', path: backendRoot + '/login' },
             response: {
                 status: 200,
                 data: { username: "bob", role:"admin" }
@@ -54,7 +57,7 @@ describe("Test login view and controller", function() {
         });
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob");
         element(by.model('credentials.password')).sendKeys("secret");
@@ -67,14 +70,14 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on invalid credentials', function() {
         mockEndpoints.push({
             // Unauthorized login (invalid credentials)
-            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            request: { method: 'POST', path: backendRoot + '/login' },
             response: {
                 status: 401
             }
         });
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob");
         element(by.model('credentials.password')).sendKeys("secret");
@@ -88,14 +91,14 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on unexpected error', function() {
         mockEndpoints.push({
             // Unexpected error (Internal server error/bug)
-            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            request: { method: 'POST', path: backendRoot + '/login' },
             response: {
                 status: 500
             }
         });
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob");
         element(by.model('credentials.password')).sendKeys("secret");
@@ -108,14 +111,14 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on connection issues', function() {
         mockEndpoints.push({
             // Connection refused (Client lacks connection or server is offline)
-            request: { method: 'POST', path: 'http://localhost:2121/login' },
+            request: { method: 'POST', path: backendRoot + '/login' },
             response: {
                 status: 0
             }
         });
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob");
         element(by.model('credentials.password')).sendKeys("secret");
@@ -128,7 +131,7 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on missing username', function() {
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.password')).sendKeys("secret");
 
@@ -140,7 +143,7 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on missing password', function() {
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob");
 
@@ -152,7 +155,7 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on missing username and password', function() {
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.css('[ng-click="attemptLogin(credentials)"]')).click();
 
@@ -163,7 +166,7 @@ describe("Test login view and controller", function() {
     it('Shows appropriate alert on malformed username', function() {
         mocks(mockEndpoints);
 
-        browser.get('http://localhost:8080/#/login');
+        browser.get(frontendRoot + '/#/login');
 
         element(by.model('credentials.username')).sendKeys("bob++");
         element(by.model('credentials.password')).sendKeys("secret");
