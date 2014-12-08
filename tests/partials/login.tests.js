@@ -125,14 +125,52 @@ describe("Test login view and controller", function() {
         expect(element(by.css("#alertConncetionIssues")).isPresent()).toBe(true);
     });
 
+    it('Shows appropriate alert on missing username', function() {
+        mocks(mockEndpoints);
 
-    /**
-     *  TODO test cases:
-     *      * Empty username and password
-     *      * Empty username
-     *      * Empty password
-     *      * Invalid username
-     *
-     */
+        browser.get('http://localhost:8080/#/login');
 
+        element(by.model('credentials.password')).sendKeys("secret");
+
+        element(by.css('[ng-click="attemptLogin(credentials)"]')).click();
+
+        expect(element(by.css("#alertMissingUsername")).isDisplayed()).toBe(true);
+    });
+
+    it('Shows appropriate alert on missing password', function() {
+        mocks(mockEndpoints);
+
+        browser.get('http://localhost:8080/#/login');
+
+        element(by.model('credentials.username')).sendKeys("bob");
+
+        element(by.css('[ng-click="attemptLogin(credentials)"]')).click();
+
+        expect(element(by.css("#alertMissingPassword")).isDisplayed()).toBe(true);
+    });
+
+    it('Shows appropriate alert on missing username and password', function() {
+        mocks(mockEndpoints);
+
+        browser.get('http://localhost:8080/#/login');
+
+        element(by.css('[ng-click="attemptLogin(credentials)"]')).click();
+
+        expect(element(by.css("#alertMissingPassword")).isDisplayed()).toBe(true);
+        expect(element(by.css("#alertMissingUsername")).isDisplayed()).toBe(true);
+    });
+
+    it('Shows appropriate alert on malformed username', function() {
+        mocks(mockEndpoints);
+
+        browser.get('http://localhost:8080/#/login');
+
+        element(by.model('credentials.username')).sendKeys("bob++");
+        element(by.model('credentials.password')).sendKeys("secret");
+
+        element(by.css('[ng-click="attemptLogin(credentials)"]')).click();
+
+        expect(element(by.css("#alertMalformedUsername")).isDisplayed()).toBe(true);
+    });
 });
+
