@@ -22,8 +22,10 @@ exports.config = {
             protractorConfig: 'protractor.conf.js' // default value: 'protractor.conf'
         };
         // XML output
-        require('jasmine-reporters');
-        jasmine.getEnv().addReporter(
-            new jasmine.JUnitXmlReporter('tests/results', true, true));
+        if(process.env.ENABLE_XML_OUTPUT) {
+            require('jasmine-reporters');
+            jasmine.getEnv().addReporter(
+                new jasmine.JUnitXmlReporter('tests/results', true, true));
+        }
     }
 };
