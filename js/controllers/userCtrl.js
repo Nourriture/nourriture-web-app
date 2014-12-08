@@ -8,23 +8,26 @@
 ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($scope, $location, UserService) {
     $scope.attemptLogin = function(credentials) {
         $scope.error = null;
+        $scope.submitted = true;
         UserService.logIn(credentials, function(errorCode, status) {
-            if(!errorCode) {
-                $location.path('/'); // Success! Navigate to front page
-            } else {
-                switch(errorCode) {
-                    case 401:
-                        // Invalid credentials
-                        $scope.credentials.password = "";
-                        $scope.error = "Invalid";
-                        break;
-                    case -1:
-                        // Connection refused
-                        $scope.error = "Connection";
-                        break;
-                    default:
-                        // Any other error
-                        $scope.error = "Unexpected"
+            if($scope.loginForm.$valid) {
+                if(!errorCode) {
+                    $location.path('/'); // Success! Navigate to front page
+                } else {
+                    switch(errorCode) {
+                        case 401:
+                            // Invalid credentials
+                            $scope.credentials.password = "";
+                            $scope.error = "Invalid";
+                            break;
+                        case -1:
+                            // Connection refused
+                            $scope.error = "Connection";
+                            break;
+                        default:
+                            // Any other error
+                            $scope.error = "Unexpected"
+                    }
                 }
             }
         });

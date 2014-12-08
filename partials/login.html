@@ -38,19 +38,27 @@
                     <span>Could not contact Nourriture. Check your connection and try again.</span>
                 </div>
 
-                <form>
+                <div>
+
+                </div>
+
+                <form name="loginForm" novalidate >
+
                     <fieldset>
-                        <label class="block clearfix">
-                        <span class="block input-icon input-icon-right">
-                            <input type="text" ng-model="credentials.username" class="form-control" placeholder="Username / Email">
-                            <i class="ace-icon fa fa-user"></i>
-                        </span>
+                        <label class="block clearfix form-group" ng-class="{ 'has-error':  loginForm.username.$invalid && submitted }">
+                            <span class="block input-icon input-icon-right">
+                                <input name="username" type="text" ng-model="credentials.username" required pattern="^[A-za-z0-9]+$|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" required class="form-control" placeholder="Username / Email">
+                                <i class="ace-icon fa fa-user"></i>
+                            </span>
+                            <span id="alertMalformedUsername" ng-show="loginForm.username.$error.pattern && submitted" class="help-block">Only valid email addresses and basic usernames accepted</span>
+                            <span id="alertMissingUsername" ng-show="loginForm.username.$error.required && submitted" class="help-block">A username or email is required to login</span>
                         </label>
 
-                        <label class="block clearfix">
+                        <label class="block clearfix form-group" ng-class="{ 'has-error':  loginForm.password.$invalid && submitted }">
                         <span class="block input-icon input-icon-right">
-                            <input type="password" ng-model="credentials.password" class="form-control" placeholder="Password">
+                            <input name="password" type="password" ng-model="credentials.password" required class="form-control" placeholder="Password">
                             <i class="ace-icon fa fa-lock"></i>
+                            <span id="alertMissingPassword" ng-show="loginForm.password.$error.required && submitted" class="help-block">A password is required to login</span>
                         </span>
                         </label>
 
