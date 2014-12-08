@@ -33,6 +33,7 @@
     "karma-chai": "~0.1.0",
     "karma-sinon": "~1.0.4",
     "karma-chai-sinon": "~0.1.4",
-    "protractor-http-mock": "git+https://git@github.com/nielssj/protractor-http-mock.git"
+    "protractor-http-mock": "git+https://git@github.com/nielssj/protractor-http-mock.git",
+    "jasmine-reporters": "~1.0.1"
   }
 }

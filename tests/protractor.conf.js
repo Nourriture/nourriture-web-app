@@ -16,9 +16,14 @@ exports.config = {
         default: ['default']
     },*/
     onPrepare: function(){
+        // Backend mocking
         require('protractor-http-mock').config = {
             rootDirectory: __dirname, // default value: process.cwd()
             protractorConfig: 'protractor.conf.js' // default value: 'protractor.conf'
         };
+        // XML output
+        require('jasmine-reporters');
+        jasmine.getEnv().addReporter(
+            new jasmine.JUnitXmlReporter('tests/results', true, true));
     }
 };
