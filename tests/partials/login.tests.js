@@ -64,7 +64,7 @@ describe("Test login view and controller", function() {
 
         element(by.css('#buttonLogin')).click();
 
-        expect(browser.getCurrentUrl()).toEqual("http://localhost:8080/#/");
+        expect(browser.getCurrentUrl()).toEqual(frontendRoot + "/#/");
     });
 
     it('Shows appropriate alert on invalid credentials', function() {
