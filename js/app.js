@@ -31,6 +31,14 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/gastronomists.html",
                 controller: "gastronomistsCtrl"
             }).
+            when('/companyProfile', {
+                templateUrl: "/partials/companyProfile.html",
+                controller: "companyCtrl"
+            }).
+            when('/gastronomistProfile', {
+                templateUrl: "/partials/gastronomistProfile.html",
+                controller: "gastronomistsCtrl"
+            }).
             otherwise({
                 redirectTo: '/'
             });
