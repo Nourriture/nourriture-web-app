@@ -2,7 +2,7 @@
  * Created by Pavel Prochazka on 09/12/14.
  */
 
-ctrls.controller("companyCtrl", ['$scope', '$http', 'Company', 'UserService', function ($scope, $http, Company, UserService) {  //have to load Company and UserService SERVICE
+ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'UserService', function ($scope, $http, $location, Company, UserService) {  //have to load Company and UserService SERVICE
 
     $scope.editedCompany = null;  //edited company
     $scope.isEditing = false;
@@ -48,19 +48,18 @@ ctrls.controller("companyCtrl", ['$scope', '$http', 'Company', 'UserService', fu
     };
 
     $scope.confirmDelete = function(){
-        console.log("aaa");
 
-        /*User.remove( {username:company.model.username},
+        Company.remove( {username:$scope.company.username},
             function() {
-                user.deleted = true;
-                _.remove($scope.users, function(item) { return item.model.username == user.model.username });
-                userDone()
+                UserService.logOut(function() {
+                    $location.path("/"); // Navigate to front page
+                });
             },
             function() {
-                user.deleteFailed = true;
-                userDone()
+                // TODO: Post error message somehow
+                console.log("Deletion failed...");
             }
-        );*/
+        );
     }
 
 }]);
