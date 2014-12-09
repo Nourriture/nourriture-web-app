@@ -32,7 +32,9 @@
                     </label>
                 </td>
 
-                <td>{{ user.model.username }}</td>
+                <td>
+                    <span id="username">{{ user.model.username }}</span>
+                </td>
                 <td>
                     <span ng-if="cur.model.username != user.model.username">{{ user.model.email }}</span>
                     <input ng-if="cur.model.username == user.model.username" type="text" ng-model="user.model.email" />
@@ -43,9 +45,13 @@
                     <span><input ng-if="cur.model.username == user.model.username" type="password" ng-model="user.model.password" placeholder="(new password)" /></span>
                 </td>
 
-                <td class="hidden-sm hidden-xs">{{ user.model.created|formatDate:"Mo MMM YYYY" }}</td>
+                <td class="hidden-sm hidden-xs">
+                    <span>{{ user.model.created|formatDate:"Mo MMM YYYY" }}</span>
+                </td>
 
-                <td class="hidden-sm hidden-xs">{{ user.model.modified|fromNow }}</td>
+                <td class="hidden-sm hidden-xs">
+                    <span>{{ user.model.modified|fromNow }}</span>
+                </td>
 
                 <td ng-if="cur.model.username != user.model.username" ng-switch="user.model.role">
                     <span ng-switch-when="raw" class="label label-md">Deactivated</span>
