@@ -77,12 +77,19 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="#">
-                                <i class="ace-icon fa fa-user"></i>
-                                Profile
+                        <li ng-if="user.role == 'comp'">
+                            <a href="#/companyProfile">
+                                <i class="ace-icon fa fa-users"></i>
+                                Company profile
                             </a>
                         </li>
+                        <li ng-if="user.role == 'gastro'">
+                            <a href="#/gastromistProfile">
+                                <i class="ace-icon fa fa-users"></i>
+                                My profile
+                            </a>
+                        </li>
+
 
                         <li class="divider"></li>
 
