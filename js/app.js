@@ -4,7 +4,7 @@
  * Main Angular script file for application
  */
 
-var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices"]);
+var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices"]);   //create a module with injected modules in brackets
 
 app.config(["$routeProvider", "$httpProvider",
     function ($routeProvider, $httpProvider) {
