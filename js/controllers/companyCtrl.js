@@ -2,6 +2,7 @@
  * Created by Pavel Prochazka on 09/12/14.
  */
 
+// "Company profile" page
 ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'UserService', function ($scope, $http, $location, Company, UserService) {  //have to load Company and UserService SERVICE
 
     $scope.editedCompany = null;  //edited company
@@ -64,6 +65,47 @@ ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'Use
 
 }]);
 
+// "Create company profile" page
+ctrls.controller("companyCreationCtrl", ['$scope', '$http', "$location", 'Company', 'UserService', function ($scope, $http, $location, Company, UserService) {
+
+    $scope.company = {};
+    $scope.missingRequired = false;
+
+    // Submit form
+    $scope.submit = function(){
+        console.log("Submitting");
+
+        if($scope.company != null && $scope.company.name != ""){
+            $scope.company.username = UserService.user.username;
+            Company.save({}, $scope.company,
+                function(response){
+                    console.log("Success");
+
+                    $("#company-created-confirm").modal(); //show modal pop-up
+                },
+                function(response){
+                   console.log("Ups error");
+                });
+        }
+        else{
+            $scope.missingRequired = true;
+        }
+    }
+
+    // Reset form values
+    $scope.reset = function(){
+        $scope.company = null;
+        $scope.missingRequired = false;
+    }
+
+    $scope.finishCreation = function(){ //redirect to the front page
+        console.log("Profile creation finished, redirect to the front page")
+
+        $location.path("/"); // Navigate to front page
+    }
+}]);
+
+// Convert to date format
 ctrls.filter('formatDate', function() {
     return function(input, format) {
         var date = moment(input);
