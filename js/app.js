@@ -46,7 +46,7 @@ app.config(["$routeProvider", "$httpProvider",
             }).
             when('/createCompanyProfile', {
                 templateUrl: "/partials/createCompanyProfile.html",
-                controller: "companyCtrl"
+                controller: "companyCreationCtrl"
             }).
             otherwise({
                 redirectTo: '/'
