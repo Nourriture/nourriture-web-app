@@ -11,7 +11,3 @@ Execute the following in the root of your repository clone:
     http-server .                       # Start web-server
 
 This will start a basic local HTTP-server at "http://localhost:8080" serving the content. In production it is of course hosted using Nginx but this setup is sufficient for rapid local development.
-
-If you wish to specify port you can add the -p parameter
-
-    http-server . -p 1337               # Now at port 1337
