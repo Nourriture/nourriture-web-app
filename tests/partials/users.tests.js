@@ -498,11 +498,10 @@ describe("'Manage Users' view and controller", function() {
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(3).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
-        element.all(by.css('.modal-footer button[data-dismiss="modal"]')).click().then(function() {
-            setTimeout(function() { // Wait for modal dismiss animation to kick in
-                element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
-            }, 50);
-        });
+        browser.waitForAngular();
+        browser.executeScript("$('.modal').removeClass('fade');");      // Get rid of Bootstrap modal fade overlay
+        element.all(by.css('.modal-footer button[data-dismiss="modal"]')).click();
+        element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
 
         // ASSERT
         var listedUsers = element.all(by.repeater("user in deleting"));
