@@ -92,17 +92,17 @@ describe("'Manage Users' view and controller", function() {
         element.all(by.css('#users-table tr')).get(3).then(function(row) {
             // Inputs
             expect(row.all(by.css('td span')).get(1).getText()).toBe("bob");
-            expect(row.all(by.model('user.model.email')).first().isPresent()).toBe(true);
-            expect(row.all(by.model('user.model.password')).first().isPresent()).toBe(true);
-            expect(row.all(by.model('user.model.role')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.email')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.password')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.role')).first().isPresent()).toBe(true);
             // Save specific controls
-            expect(row.all(by.css('button[ng-click="attemptSave(user)"]')).first().isPresent()).toBe(true);
+            expect(row.all(by.css('button[ng-click="attemptSave(cur)"]')).first().isPresent()).toBe(true);
             expect(row.all(by.css('button[ng-click="discardEdits()"]')).first().isPresent()).toBe(true);
         });
-        expect(element.all(by.model('user.model.email')).count()).toBe(1);
-        expect(element.all(by.model('user.model.password')).count()).toBe(1);
-        expect(element.all(by.model('user.model.role')).count()).toBe(1);
-        expect(element.all(by.css('button[ng-click="attemptSave(user)"]')).count()).toBe(1); // NOTE: Only 1, because the save button at the bottom does not take a user object
+        expect(element.all(by.model('cur.model.email')).count()).toBe(1);
+        expect(element.all(by.model('cur.model.password')).count()).toBe(1);
+        expect(element.all(by.model('cur.model.role')).count()).toBe(1);
+        expect(element.all(by.css('button[ng-click="attemptSave(cur)"]')).count()).toBe(1); // NOTE: Only 1, because the save button at the bottom does not take a user object
         expect(element.all(by.css('button[ng-click="discardEdits()"]')).count()).toBe(2); // NOTE: 2 because there's also a discard button at the bottom of the page
     });
     it('Closes edit-mode on row correctly upon click of ROW abort button', function() {
@@ -134,17 +134,17 @@ describe("'Manage Users' view and controller", function() {
         element.all(by.css('#users-table tr')).get(3).then(function(row) {
             // Inputs
             expect(row.all(by.css('td span')).get(1).getText()).toBe("bob");
-            expect(row.all(by.model('user.model.email')).first().isPresent()).toBe(true);
-            expect(row.all(by.model('user.model.password')).first().isPresent()).toBe(true);
-            expect(row.all(by.model('user.model.role')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.email')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.password')).first().isPresent()).toBe(true);
+            expect(row.all(by.model('cur.model.role')).first().isPresent()).toBe(true);
             // Save specific controls
-            expect(row.all(by.css('button[ng-click="attemptSave(user)"]')).first().isPresent()).toBe(true);
+            expect(row.all(by.css('button[ng-click="attemptSave(cur)"]')).first().isPresent()).toBe(true);
             expect(row.all(by.css('button[ng-click="discardEdits()"]')).first().isPresent()).toBe(true);
         });
-        expect(element.all(by.model('user.model.email')).count()).toBe(1);
-        expect(element.all(by.model('user.model.password')).count()).toBe(1);
-        expect(element.all(by.model('user.model.role')).count()).toBe(1);
-        expect(element.all(by.css('button[ng-click="attemptSave(user)"]')).count()).toBe(1); // NOTE: Only 1, because the save button at the bottom does not take a user object
+        expect(element.all(by.model('cur.model.email')).count()).toBe(1);
+        expect(element.all(by.model('cur.model.password')).count()).toBe(1);
+        expect(element.all(by.model('cur.model.role')).count()).toBe(1);
+        expect(element.all(by.css('button[ng-click="attemptSave(cur)"]')).count()).toBe(1); // NOTE: Only 1, because the save button at the bottom does not take a cur object
         expect(element.all(by.css('button[ng-click="discardEdits()"]')).count()).toBe(2); // NOTE: 2 because there's also a discard button at the bottom of the page
     });
     it('Closes edit-mode on row correctly upon click of ROW abort button', function() {
@@ -204,12 +204,12 @@ describe("'Manage Users' view and controller", function() {
         // ACT
         browser.get(frontendRoot + '/#/users');
         element.all(by.css('#users-table tr button[ng-click="startEdit(user)"]')).get(2).click();   // Start editing row
-        element.all(by.model('user.model.email')).sendKeys("mmm");                                  // Modify inputs
-        element.all(by.model('user.model.password')).sendKeys("mmm");
-        element.all(by.model("user.model.role"))
+        element.all(by.model('cur.model.email')).sendKeys("mmm");                                  // Modify inputs
+        element.all(by.model('cur.model.password')).sendKeys("mmm");
+        element.all(by.model("cur.model.role"))
             .all(by.cssContainingText('option', 'Admin'))
             .click();
-        element(by.css('div button[ng-click="attemptSave(user)"]')).click();                        // Confirm edit
+        element(by.css('div button[ng-click="attemptSave(cur)"]')).click();                        // Confirm edit
 
         // ASSERT
         var row = element.all(by.css('#users-table tr')).get(3)     // Third row (0 is header row)
@@ -243,12 +243,12 @@ describe("'Manage Users' view and controller", function() {
         // ACT
         browser.get(frontendRoot + '/#/users');
         element.all(by.css('#users-table tr button[ng-click="startEdit(user)"]')).get(2).click();   // Start editing row
-        element.all(by.model('user.model.email')).sendKeys("mmm");                                  // Modify inputs
-        element.all(by.model('user.model.password')).sendKeys("mmm");
-        element.all(by.model("user.model.role"))
+        element.all(by.model('cur.model.email')).sendKeys("mmm");                                  // Modify inputs
+        element.all(by.model('cur.model.password')).sendKeys("mmm");
+        element.all(by.model("cur.model.role"))
             .all(by.cssContainingText('option', 'Admin'))
             .click();
-        element(by.css('#users-table tr button[ng-click="attemptSave(user)"]')).click();            // Confirm edit
+        element(by.css('#users-table tr button[ng-click="attemptSave(cur)"]')).click();            // Confirm edit
 
         // ASSERT
         var row = element.all(by.css('#users-table tr')).get(3)     // Third row (0 is header row)
