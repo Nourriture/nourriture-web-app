@@ -103,6 +103,7 @@ ctrls.controller("manageUsersCtrl", ['$scope', "$location", 'User', function ($s
     };
 
     $scope.startDelete = function(user) {
+        $scope.deleting = [];
         if(user) {
             $scope.deleting.push(user)
         } else {
