@@ -4,7 +4,7 @@
 
 exports.config = {
     seleniumAddress: (process.env.SELENIUM_URL || 'http://localhost:4444/wd/hub'),
-    specs: ['partials/login.tests.js'],
+    specs: ['partials/*.js'],
     capabilities: {
         'browserName': 'chrome',
         'chromeOptions': { }
