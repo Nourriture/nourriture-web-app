@@ -77,12 +77,19 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="#">
-                                <i class="ace-icon fa fa-user"></i>
-                                Profile
+                        <li ng-if="user.role == 'comp'">
+                            <a href="#/companyProfile">
+                                <i class="ace-icon fa fa-users"></i>
+                                Company profile
                             </a>
                         </li>
+                        <li ng-if="user.role == 'gastro'">
+                            <a href="#/gastromistProfile">
+                                <i class="ace-icon fa fa-users"></i>
+                                My profile
+                            </a>
+                        </li>
+
 
                         <li class="divider"></li>
 
@@ -192,10 +199,12 @@
 <!-- Nourriture scripts -->
 <script type="text/javascript" src="js/services/userService.js"></script>
 <script type="text/javascript" src="js/services/recipeService.js"></script>
+<script type="text/javascript" src="js/services/companyService.js"></script>
 <script type="text/javascript" src="js/controllers/mainCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/userCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/recipesCtrl.js"></script>
 <script type="text/javascript" src="js/controllers/gastronomistsCtrl.js"></script>
+<script type="text/javascript" src="js/controllers/companyCtrl.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 <!-- endbuild -->
 

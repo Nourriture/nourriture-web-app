@@ -4,7 +4,8 @@
  * Main Angular script file for application
  */
 
-var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices"]);
+//create a module with injected modules in brackets (our custom MODULES)
+var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices", "companyServices"]);
 
 app.config(["$routeProvider", "$httpProvider",
     function ($routeProvider, $httpProvider) {
@@ -30,6 +31,22 @@ app.config(["$routeProvider", "$httpProvider",
             when('/gastronomists', {
                 templateUrl: "/partials/gastronomists.html",
                 controller: "gastronomistsCtrl"
+            }).
+            when('/gastronomistProfile', {
+                templateUrl: "/partials/gastronomistProfile.html",
+                controller: "gastronomistsCtrl"
+            }).
+            when('/createGastronomistProfile', {
+                templateUrl: "/partials/createGastronomistProfile.html",
+                controller: "gastronomistsCtrl"
+            }).
+            when('/companyProfile', {
+                templateUrl: "/partials/companyProfile.html",
+                controller: "companyCtrl"
+            }).
+            when('/createCompanyProfile', {
+                templateUrl: "/partials/createCompanyProfile.html",
+                controller: "companyCreationCtrl"
             }).
             otherwise({
                 redirectTo: '/'
