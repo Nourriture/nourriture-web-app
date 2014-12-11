@@ -224,9 +224,9 @@ describe("'Manage Users' view and controller", function() {
         expect(row)
             .toEqual([ '', 'bob', 'bobsaget@gihub.commmm', '(encrypted)', '', '12th Dec 2014', 'a few seconds ago', 'Admin' ]);
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'PUT', data : { $query : {  }, $save : {  }, __v : 0, $get : {  }, password : 'mmm', $delete : {  }, modified : '', username : 'bob', $update : {  }, _id : '548305347b1c1b2d5f802a00', toJSON : {  }, email : 'bobsaget@gihub.commmm', created : '2014-12-06T13:31:32.240Z', authMethod : 'local', $remove : {  }, role : 'admin' } }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'PUT', data : { $query : {  }, $save : {  }, __v : 0, $get : {  }, password : 'mmm', $delete : {  }, modified : '', username : 'bob', $update : {  }, _id : '548305347b1c1b2d5f802a00', toJSON : {  }, email : 'bobsaget@gihub.commmm', created : '2014-12-06T13:31:32.240Z', authMethod : 'local', $remove : {  }, role : 'admin' } }
         ]);
     });
     it('Submits changes correctly upon click of ROW confirm button', function() {
@@ -263,9 +263,9 @@ describe("'Manage Users' view and controller", function() {
         expect(row)
             .toEqual([ '', 'bob', 'bobsaget@gihub.commmm', '(encrypted)', '', '12th Dec 2014', 'a few seconds ago', 'Admin' ]);
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'PUT', data : { $query : {  }, $save : {  }, __v : 0, $get : {  }, password : 'mmm', $delete : {  }, modified : '', username : 'bob', $update : {  }, _id : '548305347b1c1b2d5f802a00', toJSON : {  }, email : 'bobsaget@gihub.commmm', created : '2014-12-06T13:31:32.240Z', authMethod : 'local', $remove : {  }, role : 'admin' } }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'PUT', data : { $query : {  }, $save : {  }, __v : 0, $get : {  }, password : 'mmm', $delete : {  }, modified : '', username : 'bob', $update : {  }, _id : '548305347b1c1b2d5f802a00', toJSON : {  }, email : 'bobsaget@gihub.commmm', created : '2014-12-06T13:31:32.240Z', authMethod : 'local', $remove : {  }, role : 'admin' } }
         ]);
     });
     it('Submits delete correctly upon click of ROW delete button', function() {
@@ -293,9 +293,9 @@ describe("'Manage Users' view and controller", function() {
             });
         expect(bobCells.count()).toBe(0);    // Expecting result to be an empty list
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'DELETE' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'DELETE' }
         ]);
     });
     it('Submits delete correctly upon click of BOTTOM delete button', function() {
@@ -324,9 +324,9 @@ describe("'Manage Users' view and controller", function() {
             });
         expect(bobCells.count()).toBe(0);    // Expecting result to be an empty list
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'DELETE' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'DELETE' }
         ]);
     });
     it('Aborts deletion correctly upon click of abort button', function() {
@@ -348,8 +348,8 @@ describe("'Manage Users' view and controller", function() {
         // ASSERT
         expect(element.all(by.css('#users-table tr')).count()).toBe(5); // NOTE: Including header
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' }
             // No delete request, please!
         ]);
     });
@@ -406,10 +406,10 @@ describe("'Manage Users' view and controller", function() {
             });
         expect(bobjohnCells.count()).toBe(0);    // Expecting result to be an empty list
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'DELETE' },
-            { url : 'http://localhost:2121/user/johndoe', method : 'DELETE' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'DELETE' },
+            { url : backendRoot + '/user/johndoe', method : 'DELETE' }
         ]);
     });
     it('Displays target users correctly in MULTI-USER deletion prompt', function() {
@@ -433,8 +433,8 @@ describe("'Manage Users' view and controller", function() {
             }, []);
         expect(listedUsers).toEqual(["bob (bobsaget@gihub.com) ", "johndoe (johndoe@yahoo.com) "]);
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' }
         ]);
     });
     it('Upon failed deletion, displays target users correctly in MULTI-USER deletion prompt', function() {
@@ -476,10 +476,10 @@ describe("'Manage Users' view and controller", function() {
         expect(failed.all(by.css(".ng-binding")).first().getText()).toEqual("johndoe (johndoe@yahoo.com) ");
 
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' },
-            { url : 'http://localhost:2121/user/bob', method : 'DELETE' },
-            { url : 'http://localhost:2121/user/johndoe', method : 'DELETE' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' },
+            { url : backendRoot + '/user/bob', method : 'DELETE' },
+            { url : backendRoot + '/user/johndoe', method : 'DELETE' }
         ]);
     });
     it('After aborted MULTI-USER deletion, displays target user correctly in deletion prompt', function() {
@@ -508,8 +508,8 @@ describe("'Manage Users' view and controller", function() {
         expect(listedUsers.count()).toBe(1);
         expect(listedUsers.all(by.tagName("span")).first().getText()).toEqual("bob (bobsaget@gihub.com) ");
         expect(requestsMade()).toEqual([
-            { url : 'http://localhost:2121/isloggedin', method : 'GET' },
-            { url : 'http://localhost:2121/user', method : 'GET' }
+            { url : backendRoot + '/isloggedin', method : 'GET' },
+            { url : backendRoot + '/user', method : 'GET' }
         ]);
     });
 });
