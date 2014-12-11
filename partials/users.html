@@ -37,12 +37,12 @@
                 </td>
                 <td>
                     <span ng-if="cur.model.username != user.model.username">{{ user.model.email }}</span>
-                    <input ng-if="cur.model.username == user.model.username" type="text" ng-model="user.model.email" />
+                    <input ng-if="cur.model.username == user.model.username" type="text" ng-model="cur.model.email" />
                 </td>
 
                 <td class="text-muted">
                     <span ng-if="cur.model.username != user.model.username">(encrypted)</span>
-                    <span><input ng-if="cur.model.username == user.model.username" type="password" ng-model="user.model.password" placeholder="(new password)" /></span>
+                    <span><input ng-if="cur.model.username == user.model.username" type="password" ng-model="cur.model.password" placeholder="(new password)" /></span>
                 </td>
 
                 <td class="hidden-sm hidden-xs">
@@ -60,7 +60,7 @@
                     <span ng-switch-when="admin" class="label label-md label-yellow">Admin</span>
                 </td>
                 <td ng-if="cur.model.username == user.model.username">
-                    <select ng-model="user.model.role">
+                    <select ng-model="cur.model.role">
                         <option value="raw">Deactivated</option>
                         <option value="comp">Company</option>
                         <option value="gastro">Gastronomist</option>
@@ -81,7 +81,7 @@
                 </td>
                 <td ng-if="cur.model.username == user.model.username" class="hidden-xs">
                     <div class="btn-group">
-                        <button class="btn btn-sm btn-success" ng-click="attemptSave(user)">
+                        <button class="btn btn-sm btn-success" ng-click="attemptSave(cur)">
                             <i class="ace-icon fa fa-check bigger-120"></i>
                         </button>
 

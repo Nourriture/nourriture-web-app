@@ -119,6 +119,12 @@ ctrls.controller("manageUsersCtrl", ['$scope', "$location", 'User', function ($s
 
         User.update({username:user.model.username}, user.model,
             function(resp) {
+                // Replace in list
+                var id = _.findIndex($scope.users, function(item) {
+                    return item.model.username == user.model.username;
+                });
+                $scope.users[id] = user;
+                // Clear editing "stage"
                 $scope.cur = null;
             },
             function(resp) {
