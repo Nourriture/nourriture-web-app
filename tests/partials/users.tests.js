@@ -14,7 +14,7 @@ var disableModalAnimation = function() {
     browser.executeScript("$('.modal').removeClass('fade');");
 };
 
-ddescribe("'Manage Users' view and controller", function() {
+describe("'Manage Users' view and controller", function() {
 
     /**
      *  Tested with following server responses:
