@@ -8,7 +8,13 @@ var requestsMade = mocks.requestsMade;
 var frontendRoot = (process.env.FRONTEND_ROOT || 'http://localhost:8080');
 var backendRoot = (process.env.BACKEND_ROOT || 'http://localhost:2121');
 
-describe("'Manage Users' view and controller", function() {
+// Get rid of Bootstrap modal fade animation
+var disableModalAnimation = function() {
+    browser.waitForAngular();
+    browser.executeScript("$('.modal').removeClass('fade');");
+};
+
+ddescribe("'Manage Users' view and controller", function() {
 
     /**
      *  Tested with following server responses:
@@ -281,6 +287,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
         element.all(by.css('button[ng-click="attemptDelete()"]')).click();
 
@@ -311,6 +318,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
         element.all(by.css('button[ng-click="attemptDelete()"]')).click();
@@ -342,6 +350,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
         element.all(by.css('.modal-footer button[data-dismiss="modal"]')).click();
 
@@ -366,6 +375,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
 
         // ASSERT
@@ -392,6 +402,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(3).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
@@ -418,6 +429,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(3).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
@@ -456,6 +468,7 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(3).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
@@ -495,11 +508,10 @@ describe("'Manage Users' view and controller", function() {
 
         // ACT
         browser.get(frontendRoot + '/#/users');
+        disableModalAnimation();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(2).click();
         element.all(by.css('#users-table tr input[ng-click="checkedChanged()"] + span')).get(3).click();
         element.all(by.css('button[ng-click="startDelete()"]')).click();
-        browser.waitForAngular();
-        browser.executeScript("$('.modal').removeClass('fade');");      // Get rid of Bootstrap modal fade overlay
         element.all(by.css('.modal-footer button[data-dismiss="modal"]')).click();
         element.all(by.css('#users-table tr button[ng-click="startDelete(user)"]')).get(2).click();
 
