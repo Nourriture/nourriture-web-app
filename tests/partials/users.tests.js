@@ -160,7 +160,7 @@ ddescribe("'Manage Users' view and controller", function() {
         // ACT
         browser.get(frontendRoot + '/#/users');
         element.all(by.css('#users-table tr button[ng-click="startEdit(user)"]')).get(2).click();
-        element(by.css('div button[ng-click="discardEdits()"]')).click();
+        element(by.css('.bottom-button-group button[ng-click="discardEdits()"]')).click();
 
         // ASSERT
         expect(element.all(by.model('user.model.email')).count()).toBe(0);
@@ -181,7 +181,7 @@ ddescribe("'Manage Users' view and controller", function() {
         element.all(by.model("user.model.role"))
             .all(by.cssContainingText('option', 'Admin'))
             .click();
-        element(by.css('div button[ng-click="discardEdits()"]')).click();                           // Abort edit
+        element(by.css('.bottom-button-group button[ng-click="discardEdits()"]')).click();                           // Abort edit
 
         // ASSERT
         var row = element.all(by.css('#users-table tr')).get(3)     // Third row (0 is header row)
