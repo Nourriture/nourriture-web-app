@@ -48,6 +48,10 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/createCompanyProfile.html",
                 controller: "companyCreationCtrl"
             }).
+            when('/upload', {
+                templateUrl: "/partials/upload.html",
+                controller: "uploadCtrl"
+            }).
             otherwise({
                 redirectTo: '/'
             });
