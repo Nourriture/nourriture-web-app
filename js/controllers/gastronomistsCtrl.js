@@ -11,8 +11,8 @@ ctrls.controller("gastronomistsCtrl", ['$scope', '$http', "$location", 'Gastrono
     $scope.isEditing = false;
 
     // Get specific gastronomist
-    var c = Gastronomist.query({username:UserService.user.username}, function() {
-        $scope.gastronomist = c[0];
+    var c = Gastronomist.get({username:UserService.user.username}, function() {
+        $scope.gastronomist = c;
     });
 
     //Edit

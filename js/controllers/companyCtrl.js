@@ -9,8 +9,8 @@ ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'Use
     $scope.isEditing = false;
 
     // Get specific company
-    var c = Company.query({username:UserService.user.username}, function() {
-        $scope.company = c[0];
+    var c = Company.get({username:UserService.user.username}, function() {
+        $scope.company = c;
     });
 
     //Edit
