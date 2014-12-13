@@ -72,6 +72,10 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/createIngredientProfile.html",
                 controller: "ingredientCreationCtrl"
             }).
+            when('/upload', {
+                templateUrl: "/partials/upload.html",
+                controller: "uploadCtrl"
+            }).
             otherwise({
                 redirectTo: '/'
             });

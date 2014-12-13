@@ -34,6 +34,7 @@
     "karma-sinon": "~1.0.4",
     "karma-chai-sinon": "~0.1.4",
     "protractor-http-mock": "git+https://git@github.com/nielssj/protractor-http-mock.git",
-    "jasmine-reporters": "~1.0.1"
+    "jasmine-reporters": "~1.0.1",
+    "angular-file-upload": "nervgh/angular-file-upload#v1.1.5"
   }
 }

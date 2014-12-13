@@ -41,6 +41,23 @@
     text-decoration: line-through;
 }
 
+
+.nourFileUploader .progress[data-percent]:after {
+    padding-top: 17px;
+}
+.nourFileUploader .progressLow:after {
+    color: #393939;
+ }
+.nourFileUploader .progressHigh:after {
+    color: #FFFFFF;
+}
+.nourFileUploader .ace-file-container .error {
+    color: #a94442;
+}
+.nourFileUploader .ace-file-input .ace-file-container:before {
+    padding-top: 12px;
+}
+
 .tooltip-primary + .tooltip > .tooltip-inner,
 .tooltip.tooltip-primary > .tooltip-inner {
     background-color: rgb(27, 106, 170);
