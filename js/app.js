@@ -20,6 +20,10 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/login.html",
                 controller: "loginCtrl"
             }).
+            when('/user/create', {
+                templateUrl: "/partials/createUser.html",
+                controller: "createUserCtrl"
+            }).
             when('/users', {
                 templateUrl: "/partials/users.html",
                 controller: "manageUsersCtrl"

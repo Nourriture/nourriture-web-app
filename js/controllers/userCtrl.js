@@ -4,6 +4,23 @@
  * Controller for handling user creation, user settings, login and logout
  */
 
+ctrls.controller("createUserCtrl", ['$scope', '$location', 'User', function ($scope, $location, User) {
+    $scope.requestAccount = function(user) {
+        if($scope.agreeTerms) {
+            User.save({}, user,
+                function(resp) {
+                    $location.path("/");
+                },
+                function(resp) {
+                    console.log("Account request failed.."); // TODO: Show error somewhere
+                }
+            );
+        } else {
+            console.log("Please agree to Terms") // TODO: Show error somewhere
+        }
+    }
+}]);
+
 // Login page
 ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($scope, $location, UserService) {
     $scope.attemptLogin = function(credentials) {

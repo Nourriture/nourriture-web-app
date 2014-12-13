@@ -67,6 +67,14 @@
     -moz-border-bottom-colors: rgb(27, 106, 170);
 }
 
+#requestUser fieldset > div {
+    margin-bottom: 12px;
+}
+
+#requestUser fieldset textarea {
+    height: 80px;
+}
+
 /*--------- RECIPE CSS -----------*/
 [draggable] {
   -moz-user-select: none;
