@@ -55,7 +55,7 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
 }]);
 
 // User menu in top navigation bar
-ctrls.controller("userNavCtrl", ['$rootScope', '$scope', "$location", 'UserService', function ($rootScope, $scope, $location, UserService) {
+ctrls.controller("userNavCtrl", ['$rootScope', '$scope', "$location", 'UserService', 'Recipe', 'Gastronomist', function ($rootScope, $scope, $location, UserService, Company, Gastronomist) {
     $scope.loggedIn = UserService.isLoggedIn;
 
     if($scope.loggedIn) {
@@ -66,6 +66,28 @@ ctrls.controller("userNavCtrl", ['$rootScope', '$scope', "$location", 'UserServi
         $scope.loggedIn = data.isLoggedIn;
         if($scope.loggedIn) {
             $scope.user = data.user;
+
+            var Resource = null;
+            switch(data.user.role) {
+                case "comp":
+                    Resource = Company;
+                    break;
+                case "gastro":
+                    Resource = Gastronomist;
+                    break;
+            }
+
+            if(Resource) {
+                Resource.get({username:data.user.username},
+                    function(entity) {
+                        $scope.user.profile = entity;
+                    },
+                    function(error) {
+                        // Fail silently
+                        console.log("Failed to retrieve gastronomist profile");
+                    }
+                );
+            }
         } else {
             $scope.user = null;
         }

@@ -57,6 +57,16 @@
                 </li>
             </ul>
             <ul class="nav ace-nav" ng-if="loggedIn">
+                <li class="grey">
+                    <a ng-show="user.role == 'comp' && !user.profile" href="#/createCompanyProfile" aria-expanded="false">
+                        <i class="ace-icon fa fa-exclamation"></i>
+                        <span>Company approved</span>
+                    </a>
+                    <a ng-show="user.role == 'gastro' && !user.profile" href="#/createGastronomistProfile" aria-expanded="false">
+                        <i class="ace-icon fa fa-exclamation"></i>
+                        <span>You have been approved</span>
+                    </a>
+                </li>
                 <li class="light-blue user-min">
                     <!-- User account logo/button -->
                     <a data-toggle="dropdown" href="" class="dropdown-toggle">
