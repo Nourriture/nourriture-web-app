@@ -1,0 +1,96 @@
+<div class="main-container container" id="main-container">
+    <section class="panel">
+
+        <h1>Update Recipe</h1>
+        <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Title:</label>
+            <div class="col-sm-10">
+            <input type="text" class="input-xlarge" ng-model="addrecipe.title"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Description:</label>
+            <div class="col-sm-10">
+            <textarea  id="" ng-model="addrecipe.description" ></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+              <label class="control-label col-sm-2" for="picture">Picture :</label>
+              <div class="col-sm-10">
+                <input id="picture" ng-model="addrecipe.picture" name="picture" class="input-file" type="file">
+              </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="addrecipe.difficulty">Difficulty :</label>
+            <div class="col-sm-10">
+            <select ng-model="addrecipe.difficulty" ng-options="difficulty for difficulty in difficultys"><option value="">-- choose difficulty --</option></select>
+            </div>
+        </div>
+            <hr>
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Ingredients :</label>
+            <div class="col-sm-4">
+                <input type="text" class="input-xlarge" ng-model="ingredient.name" />
+            </div>
+            <div class="col-sm-1">
+                <input type="button" class="btn btn-default" ng-model="search.button" ng-click="search()"/ value="Search">
+            </div>
+        </div>
+        <div class="form-group">
+                <div class="col-sm-6">
+                <label>Search result :</label>
+                   <ul ng-repeat="ing in ingredientslist">
+                        <li>
+                        <div class="row">
+                            <div class="col-sm-6">
+                            <label>{{ing.name}}</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="button" class="btn btn-success" value="add" ng-click="toggleAdd($index)">
+                            </div>
+                        </div>
+                        </li>
+                    </ul>
+                    <input type="button" class="btn btn-default" value="Load more" ng-click="loadMore()">
+                </div>
+                <div class="col-sm-6">
+                <label>My list :</label>
+                    <ul ng-repeat="ingd in addrecipe.ingredients">
+                        <li>
+                        <div class="row">
+                            <div class="col-sm-4"><label >{{ingd.name}}</label></div> 
+                            <div class="col-sm-4"><input type="number" min="1" value="1"><label>{{ingd.quantityUnit}}</label>
+                            </div>
+                            <div class="col-sm-4">
+                            <input type="button" class="btn btn-danger" value="X" ng-click="toggleDelete($index)"></div>
+                        </div>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <label class="control-label col-sm-2" >Instructions :</label>
+            <div class="col-sm-4">
+                <input ng-model="steps" name="stepsInput" type="number" min="1" value="1" onchange="angular.element(this).scope().stepChange(this)">
+            </div>
+        </div>
+        <div ng-repeat="i in getNumber(steps) track by $index">
+            <div class="form-group">
+            <label class="control-label col-sm-2">Step {{$index+1}} :</label>
+            <div class="col-sm-10">
+            <textarea ng-model="addrecipe.instructions[$index]"></textarea>
+            </div>
+        </div>
+        </div>
+        <div class="form-group">        
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" ng-click="save(addrecipe)">Submit</button>
+              </div>
+        </div>
+    </form>
+
+
+    </section>
+</div>

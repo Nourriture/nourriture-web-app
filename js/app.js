@@ -5,7 +5,7 @@
  */
 
 //create a module with injected modules in brackets (our custom MODULES)
-var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices", "companyServices"]);
+var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices", "companyServices", "ingredientServices"]);
 
 app.config(["$routeProvider", "$httpProvider",
     function ($routeProvider, $httpProvider) {
@@ -24,9 +24,21 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/users.html",
                 controller: "manageUsersCtrl"
             }).
-            when('/recipes', {
-                templateUrl: "/partials/recipes.html",
+            when('/recipes/create', {
+                templateUrl: "/partials/createRecipes.html",
                 controller: "recipesCtrl"
+            }).
+            when('/recipes/update', {
+                templateUrl: "/partials/updateRecipes.html",
+                controller: "updateRecipes"
+            }).
+            when('/recipes/search', {
+                templateUrl: "/partials/searchRecipes.html",
+                controller: "searchRecipes"
+            }).
+            when('/recipes/profile', {
+                templateUrl: "/partials/recipeProfile.html",
+                controller: "profileRecipes"
             }).
             when('/gastronomists', {
                 templateUrl: "/partials/gastronomists.html",
