@@ -1,5 +1,4 @@
 
-
 var ingredientServices = angular.module('ingredientServices', ['ngResource', 'nourConfig']);
 
 ingredientServices.factory('Ingredient', ['$resource', 'config',
@@ -8,6 +7,10 @@ ingredientServices.factory('Ingredient', ['$resource', 'config',
             query: {
                 method:'GET',
                 isArray:true
+            },
+            update: {
+                method:'PUT',
+                url:config.BE_HOST + '/ingredient/:name'
             }
         });
     }]);
