@@ -20,7 +20,7 @@ ctrls.controller("ingredientCtrl", ['$scope', '$http', '$location', 'Ingredient'
     }
 
     $scope.confirmEdit = function(){
-        Company.update({username:$scope.ingredient.username}, $scope.editedIngredient,
+        Company.update({name:$scope.ingredient.name}, $scope.editedIngredient,
             function(resp) {
                 $scope.ingredient = resp;
 
@@ -43,7 +43,7 @@ ctrls.controller("ingredientCtrl", ['$scope', '$http', '$location', 'Ingredient'
 
     $scope.confirmDelete = function(){
 
-        Ingredient.remove( {username:$scope.ingredient.username},
+        Ingredient.remove( {name:$scope.ingredient.name},
             function() {
                 UserService.logOut(function() {
                     $location.path("/");
@@ -67,7 +67,7 @@ ctrls.controller("ingredientCreationCtrl", ['$scope', '$http', "$location", 'Ing
         console.log("Submitting");
 
         if($scope.ingredient != null && $scope.ingredient.name != ""){
-            $scope.ingredient.username = UserService.user.username;
+            $scope.ingredient.name = UserService.user.username;
             Ingredient.save({}, $scope.ingredient,
                 function(response){
                     console.log("Success");
