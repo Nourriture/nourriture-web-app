@@ -55,7 +55,7 @@ ctrls.controller("loginCtrl", ['$scope', '$location', 'UserService', function ($
 }]);
 
 // User menu in top navigation bar
-ctrls.controller("userNavCtrl", ['$rootScope', '$scope', "$location", 'UserService', 'Recipe', 'Gastronomist', function ($rootScope, $scope, $location, UserService, Company, Gastronomist) {
+ctrls.controller("userNavCtrl", ['$rootScope', '$scope', "$location", 'UserService', 'Company', 'Gastronomist', function ($rootScope, $scope, $location, UserService, Company, Gastronomist) {
     $scope.loggedIn = UserService.isLoggedIn;
 
     if($scope.loggedIn) {
