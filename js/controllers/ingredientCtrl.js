@@ -67,7 +67,7 @@ ctrls.controller("ingredientCreationCtrl", ['$scope', '$http', "$location", 'Ing
         console.log("Submitting");
 
         if($scope.ingredient != null && $scope.ingredient.name != ""){
-            $scope.ingredient.name = UserService.user.username;
+            $scope.ingredient.company = UserService.user.username;
             Ingredient.save({}, $scope.ingredient,
                 function(response){
                     console.log("Success");
