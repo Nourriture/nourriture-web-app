@@ -5,7 +5,7 @@
  */
 
 //create a module with injected modules in brackets (our custom MODULES)
-var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices", "companyServices", "ingredientServices"]);
+var app = angular.module('nourWebApp', ["ngRoute", "ngResource", "nourConfig", "nourControllers", "userServices", "recipeServices", "companyServices", "ingredientServices", "gastronomistServices"]);
 
 app.config(["$routeProvider", "$httpProvider",
     function ($routeProvider, $httpProvider) {
