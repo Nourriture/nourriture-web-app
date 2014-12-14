@@ -7,7 +7,7 @@
 
                 <div class="col-sm-9 nourFileUploader">
                     <label class="ace-file-input">
-                        <input type="file" nv-file-select nour-upload nour-success="uploadComplete()" nour-group="company" nour-entity="{{ user.username }}" uploader="uploader" ng-show="!uploader.isUploading" id="id-input-file-2">
+                        <input type="file" nv-file-select nour-upload nour-success="uploadComplete" nour-group="company" nour-entity="{{ user.username }}" uploader="uploader" ng-show="!uploader.isUploading" id="id-input-file-2">
                         <span class="ace-file-container" nv-file-drop data-title="Browse" uploader="uploader" style="height: 52px;">
                             <span  ng-show="!uploader.isUploading && !uploader.error" class="ace-file-name" data-title="Drop an image file in this area ..." style="margin-top: 12px">
                                 <i class=" ace-icon fa fa-upload" style="padding-top: 12px"></i>

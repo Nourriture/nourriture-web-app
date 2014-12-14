@@ -11,10 +11,12 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
             pre: function ($scope, $linkElm, $linkAttr) {
                 var group = $linkAttr["nourGroup"];
                 var entity = $linkAttr["nourEntity"];
+                var bucket = "https://" + config.S3_BUCKET + ".s3.amazonaws.com/";
+                var key;
 
                 // Utility function (invoked just before upload, see below) for getting policy token needed to authorize a user to upload a file to our S3 bucket
                 var getPolicyToken = function(callback) {
-                    $http.get(config.BE_HOST + "/upload/company/token/" + entity)// TODO: Put group in here instead of "company" when backend is implemented
+                    $http.get(config.BE_HOST + "/upload/token/" + group + "/" + entity)
                         .success(function(data, status, headers, config) {
                             callback(data);
                         })
@@ -25,7 +27,7 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
 
                 // Instantiate uploader
                 var uploader = new FileUploader({
-                    url: "https://" + config.S3_BUCKET + ".s3.amazonaws.com/",
+                    url: bucket,
                     autoUpload: true,
                     formData: [
                         { AWSAccessKeyId: config.AMAZON_ID },
@@ -56,8 +58,9 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
                     item.formData.push( { "Content-Type": item._file.type} );
 
                     // Add key to store under (NOTE: Policy issued from server will only allow keys starting with the company name. This bit is mostly to add the correct file-extension)
-                    var ext = item._file.name.match(/^.+\.(png|gif|jpg|jpeg)$/)[1]; // TODO: Add sub-dir here
-                    item.formData.push( { "key": entity + "." + ext } );
+                    var ext = item._file.name.match(/^.+\.(png|gif|jpg|jpeg)$/)[1];
+                    key = group + "/" + entity + "." + ext;
+                    item.formData.push( { "key": key } ); // e.g. company/cocacola.png
 
                     // Inject a policy token retrieval before upload
                     item.upload = function(uploadItem) {
@@ -79,9 +82,11 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
 
                 // Successful upload, invoke callback, if given
                 uploader.onSuccessItem = function(item, response, status, headers) {
-                    var successFunc = $linkAttr["nourSuccess"];
-                    if(successFunc) {
-                        $scope.$apply(successFunc);
+                    var url = bucket + key;
+                    var func = $linkAttr["nourSuccess"];
+                    if(func) {
+                        var successFunc = $scope.$eval(func);
+                        successFunc(url);
                     }
                 };
 
@@ -104,7 +109,7 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
 ctrls.controller("uploadCtrl", ['$scope', "$http", "config", function ($scope, $http, config) {
     var user = "cocacola";
     $scope.user = { username: user };
-    $scope.uploadComplete = function() {
-        $scope.imageSrc = "https://" + config.S3_BUCKET + ".s3.amazonaws.com/" + user + ".jpg" + "?cb=" + (new Date()).toString();
+    $scope.uploadComplete = function(url) {
+        $scope.imageSrc = url;
     }
 }]);
