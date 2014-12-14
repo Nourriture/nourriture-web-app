@@ -57,6 +57,9 @@
 .nourFileUploader .ace-file-input .ace-file-container:before {
     padding-top: 12px;
 }
+.nourFileUploader label {
+    height: 52px;
+}
 
 .tooltip-primary + .tooltip > .tooltip-inner,
 .tooltip.tooltip-primary > .tooltip-inner {
