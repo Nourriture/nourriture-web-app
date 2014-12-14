@@ -103,6 +103,11 @@ ctrls.controller("companyCreationCtrl", ['$scope', '$http', "$location", 'Compan
 
         $location.path("/"); // Navigate to front page
     }
+
+    $scope.logoUploadComplete = function(url) {
+        $scope.company.logo = url;
+        $scope.logoSrc = url + "?rn=" + new Date();
+    }
 }]);
 
 // Convert to date format

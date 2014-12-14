@@ -9,6 +9,12 @@
             <!-- PAGE CONTENT BEGINS -->
             <form class="form-horizontal" role="form">
                 <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right" for="form-field-1"></label>
+                    <div class="col-sm-9">
+                        <img ng-if="logoSrc" ng-src="{{logoSrc}}" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Company name </label>
 
                     <div class="col-sm-9">
@@ -37,8 +43,8 @@
 
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="id-input-file-2"> Logo </label>
-
-                    <div class="col-sm-9">
+                    <div nour-upload nour-success="logoUploadComplete" nour-group="company" nour-entity="{{ user.username }}" class="col-sm-9 nourFileUploader"></div>
+                    <!--<div class="col-sm-9">
                         <label class="ace-file-input">
                             <input type="file" id="id-input-file-2">
                             <span class="ace-file-container" data-title="Choose">
@@ -50,7 +56,7 @@
                                 <i class=" ace-icon fa fa-times"></i>
                             </a>
                         </label>
-                    </div>
+                    </div>-->
                 </div>
 
                 <div class="form-group">
