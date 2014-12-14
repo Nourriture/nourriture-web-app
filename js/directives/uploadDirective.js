@@ -1,18 +1,20 @@
 /**
  * Created by niels on 11/30/14.
  *
- * Controller for testing file upload
+ * Amazon S3 based file-uploader for the various image upload forms throughout Nourriture
  */
 
 var upldModule = angular.module("nourUpload", ["nourConfig", "angularFileUpload"]);
+
 upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function($http, config, FileUploader) {
     return {
-        templateUrl: "partials/nourUpload.html",
+        templateUrl: "partials/directives/uploadDirective.html",
         compile: function ($tmplElm, $tmplAttr) {
             // Compiling
             var uploaderId = $tmplAttr["uploader"];
             if(!uploaderId) uploaderId = "uploader";    // Default id, if non specified
-            $tmplElm.find("[nv-file-select],[nv-file-drop]").attr("uploader", uploaderId);
+            $tmplElm.find("[nv-file-select],[nv-file-drop]").attr("uploader", uploaderId);  // Forward uploader reference to dependency module "angular-file-upload"
+
             // Linking
             return {
                 pre: function ($scope, $linkElm, $linkAttr) {
@@ -114,13 +116,5 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
                 }
             }
         }
-    }
-}]);
-
-ctrls.controller("uploadCtrl", ['$scope', "$http", "config", function ($scope, $http, config) {
-    var user = "cocacola";
-    $scope.user = { username: user };
-    $scope.uploadComplete = function(url) {
-        $scope.imageSrc = url + "?rn=" + new Date();
     }
 }]);
