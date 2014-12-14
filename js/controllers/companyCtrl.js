@@ -67,9 +67,9 @@ ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'Use
 
 // "Create company profile" page
 ctrls.controller("companyCreationCtrl", ['$scope', '$http', "$location", 'Company', 'UserService', function ($scope, $http, $location, Company, UserService) {
-
     $scope.company = {};
     $scope.missingRequired = false;
+    $scope.username = UserService.user.username;
 
     // Submit form
     $scope.submit = function(){

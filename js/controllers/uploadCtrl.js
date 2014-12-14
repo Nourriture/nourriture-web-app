@@ -64,6 +64,8 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
                     // Final preparations for upload after user submitted file and it passed restrictions
                     uploader.onAfterAddingFile = function (item) {
                         uploader.error = null;
+                        group = $linkAttr["nourGroup"];
+                        entity = $linkAttr["nourEntity"];
 
                         // Add Content-Type field depending on file submitted by user
                         item.formData.push({"Content-Type": item._file.type});
