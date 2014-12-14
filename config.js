@@ -7,6 +7,6 @@ angular.module('nourConfig', [])
     .constant('config', {
         BE_HOST: 'http://localhost:2121',
         AMAZON_ID: 'AKIAILKFLEMORXD54SPQ',
-        S3_BUCKET: 'nourriture-consumer'
+        S3_BUCKET: 'nourriture'
     }
 );
