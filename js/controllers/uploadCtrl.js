@@ -94,11 +94,8 @@ upldModule.directive("nourUpload", ["$http", "config", "FileUploader", function(
                     // Successful upload, invoke callback, if given
                     uploader.onSuccessItem = function (item, response, status, headers) {
                         var url = bucket + key;
-                        var func = $linkAttr["nourSuccess"];
-                        if (func) {
-                            var successFunc = $scope.$eval(func);
-                            successFunc(url);
-                        }
+                        var successFunc = $scope.$eval($linkAttr["nourSuccess"]);
+                        if (successFunc) successFunc(url);
                     };
 
                     // Failed upload, show error message
