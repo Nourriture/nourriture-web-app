@@ -67,7 +67,7 @@ ctrls.controller("ingredientCreationCtrl", ['$scope', '$http', "$location", 'Ing
         console.log("Submitting");
 
         if($scope.ingredient != null && $scope.ingredient.name != ""){
-            $scope.ingredient.company = UserService.user.username;
+            $scope.ingredient. company = UserService.user.username;
             Ingredient.save({}, $scope.ingredient,
                 function(response){
                     console.log("Success");
@@ -94,4 +94,107 @@ ctrls.controller("ingredientCreationCtrl", ['$scope', '$http', "$location", 'Ing
 
         $location.path("/");
     }
+}]);
+
+ctrls.controller("searchIngredientCtrl", ['$scope', '$http', '$location', "Ingredient", "SaveIngredient", function ($scope, $http, $location, Ingredient, SaveIngredient) {
+
+$scope.tmp = [];
+
+$scope.tmp = [
+        { name: 'Banana'},
+        { name: 'Tomato'},
+        { name: 'Ketchup'},
+        { name: 'Meat'},
+        { name: 'Fish'},
+        { name: 'Egg'},
+        { name: 'Orange'}];
+
+$scope.search = function(name)
+      {
+
+        //$scope.tmp = Ingredient.get(name);
+
+        $scope.tmp = [
+        { name: 'Banana'},
+        { name: 'Tomato'},
+        { name: 'Ketchup'},
+        { name: 'Meat'},
+        { name: 'Fish'},
+        { name: 'Egg'},
+        { name: 'Orange'}];
+        
+        //--------------------------------------------
+
+
+        $scope.ingredientlist = [];
+        if ($scope.tmp.length > 10)
+        {
+            for (index = 0; index < 10; index++) {
+                $scope.ingredientlist.push($scope.tmp[index]);
+            }
+        }
+        else {
+            $scope.ingredientlist = $scope.tmp;
+        }
+        };
+
+$scope.loadMore = function ()
+{
+    var indexTmp = index + 10;
+    if (indexTmp > $scope.tmp.length)
+        indexTmp = $scope.tmp.length;
+    for (index; index < indexTmp; index++) {
+        $scope.ingredientlist.push($scope.tmp[index]);
+    };
+
+    $scope.toggleShow = function (data)
+    {
+        console.log(data);
+        $location.path("/ingredientProfile");
+    }
+};
+}]);
+
+ctrls.controller("searchIngredientByCompanyCtrl", ['$scope', '$http', '$location', "Ingredient", "SaveIngredient", function ($scope, $http, $location, Ingredient, SaveIngredient) {
+
+$scope.tmp = [];
+
+$scope.searchCompany = function(company)
+      {
+
+        //$scope.tmp = Ingredient.get(company);
+
+        $scope.tmp = [
+        { name: 'Banana', company: 'Coca'},
+        { name: 'Tomato', company: 'Coca'},
+        { name: 'Ketchup', company: 'Coca'},
+        { name: 'Meat', company: 'Coca'},
+        { name: 'Fish', company: 'Coca'},
+        { name: 'Egg', company: 'Coca'},
+        { name: 'Orange', company: 'Coca'}];
+        
+        //--------------------------------------------
+
+
+        $scope.ingredientlist = [];
+        if ($scope.tmp.length > 10)
+        {
+            for (index = 0; index < 10; index++) {
+                $scope.ingredientlist.push($scope.tmp[index]);
+            }
+        }
+        else {
+            $scope.ingredientlist = $scope.tmp;
+        }
+        };
+
+$scope.loadMore = function ()
+{
+    var indexTmp = index + 10;
+    if (indexTmp > $scope.tmp.length)
+        indexTmp = $scope.tmp.length;
+    for (index; index < indexTmp; index++) {
+        $scope.ingredientlist.push($scope.tmp[index]);
+    };
+};
 }]);
