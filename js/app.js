@@ -32,7 +32,7 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/createRecipes.html",
                 controller: "recipesCtrl"
             }).
-            when('/recipes/update', {
+            when('/recipes/update/:Id?', {
                 templateUrl: "/partials/updateRecipes.html",
                 controller: "updateRecipes"
             }).
@@ -40,7 +40,7 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/searchRecipes.html",
                 controller: "searchRecipes"
             }).
-            when('/recipes/profile', {
+            when('/recipes/profile/:Id?', {
                 templateUrl: "/partials/recipeProfile.html",
                 controller: "profileRecipes"
             }).

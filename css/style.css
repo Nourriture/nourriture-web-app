@@ -96,15 +96,6 @@
 }
 
 /*--------- RECIPE CSS -----------*/
-[draggable] {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  /* Required to make elements draggable in old WebKit */
-  -khtml-user-drag: element;
-  -webkit-user-drag: element;
-}
 
 .panel{
     margin: 20px 20px 0 20px;
@@ -114,3 +105,78 @@
     list-style-type: none;
 }
 
+.form-recipe-create{
+    margin-top: 50px;
+}
+
+#search-bar{
+    width: 89%;
+}
+
+#loadmore{
+    display: block;
+    margin-left: auto; margin-right: auto;
+    width: 200px;
+    height: 42px;
+}
+
+#recipe-search{
+    width: 10%;
+    border: 0px;
+    margin-left: 0px;
+}
+
+.list-recipe label{
+    height: 42px;
+    line-height: 42px;
+}
+
+.list-recipe{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+.list-recipe-left{
+    border-right: 2px solid gray;
+}
+
+.unit{
+    display: block;
+    float: right;
+    width: 30px;
+}
+
+.quantity{
+    width: 65px;
+    height: 42px;
+}
+
+.input-width{
+    width: 100%;
+}
+
+.section-form .form-group input{
+    text-align: center;
+}
+
+.section-form-profile .form-group span{
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #e4e6e9;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.section-form-profile .form-group label{
+    height: 34px;
+    margin-top: 0px;
+    padding-top: 0px;
+    line-height: 34px;
+}
+
+.radius-btn{
+    border-radius: 200px;
+}

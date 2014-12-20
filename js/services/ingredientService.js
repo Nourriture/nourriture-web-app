@@ -7,6 +7,11 @@ ingredientServices.factory('Ingredient', ['$resource', 'config',
             update: {
                 method:'PUT',
                 url:config.BE_HOST + '/ingredient/:name'
+            },
+            byName: {
+                method:'GET',
+                url:config.BE_HOST + '/ingredient/name/:nameId',
+                isArray:true
             }
         });
     }]);

@@ -4,15 +4,22 @@
  * Controller for listing, adding and editing recipes
  */
 
-ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingredient", "SaveRecipe", function ($scope, $http, $location, Recipe, Ingredient, SaveRecipe) {
+ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingredient", "UserService", function ($scope, $http, $location, Recipe, Ingredient, UserService) {
 
     $scope.addrecipe = {};
     $scope.addrecipe.ingredients = [];
     $scope.addrecipe.instructions = [];
+    $scope.addrecipe.fat = 0;
+    $scope.addrecipe.carbs = 0;
+    $scope.addrecipe.proteins = 0;
+    $scope.addrecipe.calories = 0;
+    $scope.addrecipe.author = "549421169309181831aedf20";
     $scope.tmp = [];
     $scope.ingredientslist = [];
     $scope.loadError = false;
     $scope.difficultys = [1, 2, 3, 4, 5];
+    $scope.loadshow = true;
+    $scope.steps = 1;
     var index = 0;
     var stepIndex = 1;
 
@@ -24,50 +31,37 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
 
 
     $scope.save = function(addrecipe) {
-    console.log(addrecipe);
-
-    /*    Recipe.save(id:addrecipe.id, addrecipe);
-    $location.path("/recipes/search");*/
-    };
+        console.log(addrecipe);
+    if (addrecipe.title && addrecipe.description && addrecipe.instructions.length >= 1 && addrecipe.ingredients.length >= 1 && addrecipe.difficulty)
+    {
+    Recipe.save(addrecipe);
+    $location.path("/recipes/search");
+    }};
 
     $scope.search = function(name)
       {
-
-        // ----- TEST WITHOUT SERVER -----
-        //$scope.tmp = Ingredient.byName(name);
-        $scope.tmp = [
-        { name: 'Orange',   quantityUnit: 'piece' },
-        { name: 'tomato',   quantityUnit: 'piece' },
-        { name: 'Ketchup',   quantityUnit: 'ml' },
-        { name: 'Cookie',   quantityUnit: 'piece' },
-        { name: 'Shite', quantityUnit: 'g' },
-        { name: 'Pasta',  quantityUnit: 'g' },
-        { name: 'Banana',   quantityUnit: 'piece' },
-        { name: 'truc',   quantityUnit: 'piece' },
-        { name: 'machin',   quantityUnit: 'ml' },
-        { name: 'bidule',   quantityUnit: 'piece' },
-        { name: 'chouette', quantityUnit: 'g' },
-        { name: 'tralala',  quantityUnit: 'g' },
-        { name: 'trololo',   quantityUnit: 'piece' },
-        { name: 'Jean-mi',   quantityUnit: 'piece' },
-        { name: 'Jackie',   quantityUnit: 'ml' },
-        { name: 'Michel',   quantityUnit: 'piece' },
-        { name: 'Fred', quantityUnit: 'g' },
-        { name: 'Jamie',  quantityUnit: 'g' }];
-        //-----------------------------------------
-        
-        console.log($scope.tmp.length);
         $scope.ingredientslist = [];
-        if ($scope.tmp.length > 10)
-        {
-            for (index = 0; index < 10; index++) {
-                $scope.ingredientslist.push($scope.tmp[index]);
-            }
-        }
-        else {
-            $scope.ingredientslist = $scope.tmp;
-        }
-        };
+        var a = Ingredient.byName({nameId:name}, function()
+            {
+                $scope.tmp = a;
+                for (b = 0; b < $scope.tmp.length; b++)
+                {
+                    $scope.tmp[b].quantity = 1;
+                }
+
+                if ($scope.tmp.length > 10)
+                {
+                    $scope.loadshow = false;
+                    for (index = 0; index < 10; index++) {
+                        $scope.ingredientslist.push($scope.tmp[index]);
+                    }
+                }
+                else {
+                    $scope.loadshow = true;
+                    $scope.ingredientslist = $scope.tmp;
+                }
+                });
+    };
           
 
     $scope.toggleAdd = function (index) {
@@ -75,6 +69,10 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
         if ($scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index]) == -1)
         {
             $scope.addrecipe.ingredients.push($scope.ingredientslist[index]);
+        }
+        else
+        {
+            $scope.addrecipe.ingredients[$scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index])].quantity = $scope.addrecipe.ingredients[$scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index])].quantity + 1;
         }
     };
 
@@ -104,47 +102,25 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
 
 }]);
 
-ctrls.controller("searchRecipes", ['$scope', '$http', '$location', "Recipe", "SaveRecipe", function ($scope, $http, $location, Recipe, SaveRecipe) {
+ctrls.controller("searchRecipes", ['$scope', '$http', '$location', "Recipe", function ($scope, $http, $location, Recipe) {
 
 $scope.tmp = [];
-
-$scope.search = function(name)
+$scope.loadshow = true;
+$scope.search = function(titleId)
       {
 
-        //-------- TEST WITHOUT SERVER ------------
-        //$scope.tmp = Recipe.byName(name);
-
-        $scope.tmp = [
-        { name: 'lazagne',   quantityUnit: 'piece' },
-        { name: 'tomato',   quantityUnit: 'piece' },
-        { name: 'Ketchup',   quantityUnit: 'ml' },
-        { name: 'Cookie',   quantityUnit: 'piece' },
-        { name: 'Shite', quantityUnit: 'g' },
-        { name: 'Pasta',  quantityUnit: 'g' },
-        { name: 'Banana',   quantityUnit: 'piece' },
-        { name: 'truc',   quantityUnit: 'piece' },
-        { name: 'machin',   quantityUnit: 'ml' },
-        { name: 'bidule',   quantityUnit: 'piece' },
-        { name: 'chouette', quantityUnit: 'g' },
-        { name: 'tralala',  quantityUnit: 'g' },
-        { name: 'trololo',   quantityUnit: 'piece' },
-        { name: 'Jean-mi',   quantityUnit: 'piece' },
-        { name: 'Jackie',   quantityUnit: 'ml' },
-        { name: 'Michel',   quantityUnit: 'piece' },
-        { name: 'Fred', quantityUnit: 'g' },
-        { name: 'Jamie',  quantityUnit: 'g' }];
-        
-        //--------------------------------------------
-
+        $scope.tmp = Recipe.byTitle({titleId:titleId});
 
         $scope.recipeslist = [];
         if ($scope.tmp.length > 10)
         {
+            $scope.loadshow = false;
             for (index = 0; index < 10; index++) {
                 $scope.recipeslist.push($scope.tmp[index]);
             }
         }
         else {
+            $scope.loadshow = true;
             $scope.recipeslist = $scope.tmp;
         }
         };
@@ -163,57 +139,40 @@ $scope.loadMore = function ()
 $scope.toggleShow = function (data)
     {
         console.log(data);
-        SaveRecipe.set(data);
-        $location.path("/recipes/profile");
+        $location.path("/recipes/profile/" + data._id);
     }
 
 }]);
 
 
-ctrls.controller("profileRecipes", ['$scope', '$http', '$location', "Recipe", "SaveRecipe", function ($scope, $http, $location, Recipe, SaveRecipe) {
+ctrls.controller("profileRecipes", ['$scope', '$http', '$location', "$routeParams", "Recipe", function ($scope, $http, $location, $routeParams, Recipe) {
+$scope.Id = $routeParams.Id;
+$scope.addrecipe = {};
+var tmp = Recipe.get({id:$scope.Id}, function(){
+    $scope.addrecipe = tmp;
+    $scope.steps = $scope.addrecipe.instructions.length;
+});
 
-/*$scope.addrecipe = SaveRecipe.get();*/
-//----- TEST WITHOUT SERVER ------
-$scope.addrecipe = {title: "Test",
-description: "trololololo",
-difficulty: 3,
-instructions: ["step1", "step2"],
-ingredients: [{name: "Orange", quantity: "piece"}, {name: "tomato", quantity: "piece"}]
-};
-// -----------------------------
-
-
-$scope.steps = $scope.addrecipe.instructions.length;
 $scope.toggleUpdate = function ()
     {
-        $location.path("/recipes/update");
+        $location.path("/recipes/update/" + $scope.Id);
     }
 
     $scope.toggleDelete = function ()
     {
-     /*   Recipe.delete(id:addrecipe.id);
-        $location.path("/recipes/search");*/
+        Recipe.delete({id:$scope.Id});
+        $location.path("/recipes/search");
     }
 
 }]);
 
-ctrls.controller("updateRecipes", ['$scope', '$http', '$location', "Recipe", "SaveRecipe", function ($scope, $http, $location, Recipe, SaveRecipe) {
-
-/*$scope.addrecipe = SaveRecipe.get();*/
-//----- TEST WITHOUT SERVER -----
-$scope.addrecipe = {title: "Test",
-description: "trololololo",
-difficulty: 3,
-instructions: ["step1", "step2"],
-ingredients: [{name: "Orange", quantity: "piece"}, {name: "tomato", quantity: "piece"}]
-};
-
-// -----------------------------------
-
-
-$scope.steps = $scope.addrecipe.instructions.length;
-
-
+ctrls.controller("updateRecipes", ['$scope', '$http', '$location', '$routeParams', "Recipe", "Ingredient", function ($scope, $http, $location, $routeParams, Recipe, Ingredient) {
+$scope.Id = $routeParams.Id;
+var tmp = Recipe.get({id:$scope.Id}, function(){
+    $scope.addrecipe = tmp;
+    $scope.steps = $scope.addrecipe.instructions.length;
+});
+    $scope.loadshow = true;
     $scope.tmp = [];
     $scope.ingredientslist = [];
     $scope.loadError = false;
@@ -230,57 +189,41 @@ $scope.steps = $scope.addrecipe.instructions.length;
 
     $scope.save = function(addrecipe) {
     console.log(addrecipe);
-    SaveRecipe.set(data);
-
-    //-------- TEST WITHOUT SERVER -----------
-    /*Recipe.update(id:addrecipe.id, addrecipe);
-    $location.path("/recipes/profile");*/
-
-    // -----------------------------
+if (addrecipe.title && addrecipe.title != "" && 
+    addrecipe.description && addrecipe.description != "" &&
+    addrecipe.instructions.length >= 1 && addrecipe.ingredients.length >= 1 && addrecipe.difficulty)
+    {
+    Recipe.update({recipeId:addrecipe._id}, addrecipe);
+    $location.path("/recipes/profile/"+$scope.Id);
+}
     };
 
 
     $scope.search = function(name)
       {
-
-        
-
-        //-------- TEST WITHOUT SERVER ------------
-        //$scope.tmp = Ingredient.query(_id);
-
-        $scope.tmp = [
-        { name: 'Orange',   quantityUnit: 'piece' },
-        { name: 'tomato',   quantityUnit: 'piece' },
-        { name: 'Ketchup',   quantityUnit: 'ml' },
-        { name: 'Cookie',   quantityUnit: 'piece' },
-        { name: 'Shite', quantityUnit: 'g' },
-        { name: 'Pasta',  quantityUnit: 'g' },
-        { name: 'Banana',   quantityUnit: 'piece' },
-        { name: 'truc',   quantityUnit: 'piece' },
-        { name: 'machin',   quantityUnit: 'ml' },
-        { name: 'bidule',   quantityUnit: 'piece' },
-        { name: 'chouette', quantityUnit: 'g' },
-        { name: 'tralala',  quantityUnit: 'g' },
-        { name: 'trololo',   quantityUnit: 'piece' },
-        { name: 'Jean-mi',   quantityUnit: 'piece' },
-        { name: 'Jackie',   quantityUnit: 'ml' },
-        { name: 'Michel',   quantityUnit: 'piece' },
-        { name: 'Fred', quantityUnit: 'g' },
-        { name: 'Jamie',  quantityUnit: 'g' }];
-        
-        //-------------------------------------------------
-
-        console.log($scope.tmp.length);
         $scope.ingredientslist = [];
-        if ($scope.tmp.length > 10)
-        {
-            for (index = 0; index < 10; index++) {
-                $scope.ingredientslist.push($scope.tmp[index]);
-            }
-        }
-        else {
-            $scope.ingredientslist = $scope.tmp;
-        }
+        var a = Ingredient.byName({nameId:name}, function()
+            {
+                $scope.tmp = a;
+                for (b = 0; b < $scope.tmp.length; b++)
+                {
+                    $scope.tmp[b].quantity = 1;
+                }
+
+                if ($scope.tmp.length > 10)
+                {
+                    $scope.loadshow = false;
+                    for (index = 0; index < 10; index++) {
+                        $scope.ingredientslist.push($scope.tmp[index]);
+                    }
+                }
+                else {
+                    $scope.loadshow = true;
+                    $scope.ingredientslist = $scope.tmp;
+                }
+                });
+        
+
         };
           
 
@@ -290,10 +233,13 @@ $scope.steps = $scope.addrecipe.instructions.length;
         {
             $scope.addrecipe.ingredients.push($scope.ingredientslist[index]);
         }
+        else
+        {
+            $scope.addrecipe.ingredients[$scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index])].quantity = $scope.addrecipe.ingredients[$scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index])].quantity + 1;
+        }
     };
 
     $scope.toggleDelete = function (index) {
-        console.log(index);
         $scope.addrecipe.ingredients.splice(index, 1);
     };
 
@@ -310,6 +256,7 @@ $scope.steps = $scope.addrecipe.instructions.length;
 
     $scope.stepChange = function()
     {
+        console.log("stepIndex : ", stepIndex, "scope.step : ", $scope.steps);
         for (stepIndex; stepIndex > $scope.steps; stepIndex--) {
         $scope.addrecipe.instructions.pop();
         };

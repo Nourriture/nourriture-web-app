@@ -14,22 +14,12 @@ recipeServices.factory('Recipe', ['$resource', 'config',
             },
             update: {
                 method:'PUT',
-                url:config.BE_HOST + '/recipe/:id'
+                url:config.BE_HOST + '/recipe/:recipeId'
+            },
+            byTitle: {
+                method:'GET',
+                url:config.BE_HOST + '/recipe/title/:titleId',
+                isArray:true
             }
         });
-    }]).factory('SaveRecipe', function () 
-    {
-    	var savedData = {}
-		 function set(data) {
-		   savedData = data;
-		 }
-		 function get() {
-		  return savedData;
-		 }
-
-		 return {
-		  set: set,
-		  get: get
-		 }
-
-    });
+    }]);
