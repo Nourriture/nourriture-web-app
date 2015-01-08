@@ -87,13 +87,13 @@
                             </a>
                         </li>
 
-                        <li ng-if="user.role == 'comp'">
+                        <li ng-show="user.role == 'comp' && user.profile">
                             <a href="#/companyProfile">
                                 <i class="ace-icon fa fa-users"></i>
                                 Company profile
                             </a>
                         </li>
-                        <li ng-if="user.role == 'gastro'">
+                        <li ng-if="user.role == 'gastro' && user.profile">
                             <a href="#/gastronomistProfile">
                                 <i class="ace-icon fa fa-users"></i>
                                 My profile
