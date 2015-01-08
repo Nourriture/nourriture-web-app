@@ -101,7 +101,7 @@ ctrls.controller("companyCreationCtrl", ['$scope', '$http', "$location", 'Compan
     $scope.finishCreation = function(){ //redirect to the front page
         console.log("Profile creation finished, redirect to the front page")
 
-        $location.path("/"); // Navigate to front page
+        window.location.href = "/"
     }
 
     $scope.logoUploadComplete = function(url) {
