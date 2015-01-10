@@ -49,10 +49,10 @@ app.config(["$routeProvider", "$httpProvider",
                 controller: "profileRecipes"
             }).
             when('/gastronomists', {
-                templateUrl: "/partials/gastronomists.html",
-                controller: "gastronomistsCtrl"
+                templateUrl: "/partials/listGastronomists.html",
+                controller: "listGastronomistsCtrl"
             }).
-            when('/gastronomistProfile', {
+            when('/gastronomistProfile/:id', {
                 templateUrl: "/partials/gastronomistProfile.html",
                 controller: "gastronomistsCtrl"
             }).

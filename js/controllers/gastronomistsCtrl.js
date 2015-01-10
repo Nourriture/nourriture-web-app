@@ -5,15 +5,13 @@
  */
 
 // "Gastronomist profile" page
-ctrls.controller("gastronomistsCtrl", ['$scope', '$http', "$location", 'Gastronomist', 'UserService', function ($scope, $http, $location, Gastronomist, UserService) {  //have to load Company and UserService SERVICE
+ctrls.controller("gastronomistsCtrl", ['$scope', '$http', "$location", '$routeParams', 'Gastronomist', 'UserService', function ($scope, $http, $location, $routeParams, Gastronomist, UserService) {  //have to load Company and UserService SERVICE
 
     $scope.editedGastronomist = null;  //edited gastronomist
     $scope.isEditing = false;
 
     // Get specific gastronomist
-    var c = Gastronomist.get({username:UserService.user.username}, function() {
-        $scope.gastronomist = c;
-    });
+    $scope.gastronomist = Gastronomist.get({username:$routeParams.id});
 
     //Edit
     $scope.edit = function(){
@@ -105,6 +103,10 @@ ctrls.controller("gastronomistCreationCtrl", ['$scope', '$http', "$location", 'G
 
         $location.path("/"); // Navigate to front page
     }
+}]);
+
+ctrls.controller("listGastronomistsCtrl", ['$scope', '$http', "$location", 'Gastronomist', 'UserService', function ($scope, $http, $location, Gastronomist, UserService) {
+    $scope.gastronomists = Gastronomist.query();
 }]);
 
 // Convert to date format
