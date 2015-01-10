@@ -122,10 +122,14 @@
                 <div>
                     <div class="row" ng-repeat="ingredient in ingredients">
                         <div class="col-md-2 col-xs-2">
-                            <img width="100%" style="max-width: 150px" ng-src="{{ ingredient.picture }}" />
+                            <a href="/#/ingredientProfile/{{ ingredient._id }}">
+                                <img width="100%" style="max-width: 150px" ng-src="{{ ingredient.picture }}" />
+                            </a>
                         </div>
                         <div class="col-md-8 col-xs-8">
-                            <h3>{{ ingredient.name }}</h3>
+                            <a href="/#/ingredientProfile/{{ ingredient._id }}" style="text-decoration: none">
+                                <h3>{{ ingredient.name }}</h3>
+                            </a>
                         </div>
                         <div class="col-md-2 col-xs-2">
                             <br />
