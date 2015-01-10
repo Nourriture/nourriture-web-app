@@ -60,7 +60,7 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/createGastronomistProfile.html",
                 controller: "gastronomistCreationCtrl"
             }).
-            when('/companyProfile', {
+            when('/companyProfile/:id', {
                 templateUrl: "/partials/companyProfile.html",
                 controller: "companyCtrl"
             }).

@@ -3,13 +3,13 @@
  */
 
 // "Company profile" page
-ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'Ingredient', 'UserService', function ($scope, $http, $location, Company, Ingredient, UserService) {  //have to load Company and UserService SERVICE
+ctrls.controller("companyCtrl", ['$scope', '$http', "$location", '$routeParams', 'Company', 'Ingredient', 'UserService', function ($scope, $http, $location, $routeParams, Company, Ingredient, UserService) {  //have to load Company and UserService SERVICE
 
     $scope.editedCompany = null;  //edited company
     $scope.isEditing = false;
 
     // Get specific company
-    $scope.company = Company.get({username:UserService.user.username});
+    $scope.company = Company.get({username:$routeParams.id});
 
     // Get ingredients
     $scope.ingredients = Ingredient.query({ company:UserService.user.username });
