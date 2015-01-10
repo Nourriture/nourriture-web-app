@@ -130,6 +130,27 @@
 
                 <div class="space-20"></div>
 
+                <div class="page-header">
+                    <h1>Latest Recipes</h1>
+                </div>
+                <div ng-repeat="recipe in recipes" class="row list-recipe">
+                    <div class="col-sm-3 col-xs-3">
+                        <a href="/#/recipes/profile/{{recipe._id}}" class="profile-picture">
+                            <img ng-src="{{recipe.picture}}" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="col-sm-9 col-xs-9">
+                        <a href="/#/recipes/profile/{{recipe._id}}" style="text-decoration: none">
+                            <h3>{{recipe.title}}</h3>
+                        </a>
+                        <p>{{recipe.description}}</p>
+                    </div>
+                </div>
+                <div class="space-24"></div>
+                <button type="button" class="pull-right btn btn-sm btn-success" ng-click="createRecipe()">
+                    <i class="ace-icon fa fa-plus"></i>
+                    <span class="bigger-110">Create Recipe</span>
+                </button>
             </div>
         </div>
     </div>

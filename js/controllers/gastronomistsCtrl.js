@@ -5,13 +5,14 @@
  */
 
 // "Gastronomist profile" page
-ctrls.controller("gastronomistsCtrl", ['$scope', '$http', "$location", '$routeParams', 'Gastronomist', 'UserService', function ($scope, $http, $location, $routeParams, Gastronomist, UserService) {  //have to load Company and UserService SERVICE
+ctrls.controller("gastronomistsCtrl", ['$scope', '$http', '$location', '$routeParams', 'Gastronomist', 'Recipe', 'UserService', function ($scope, $http, $location, $routeParams, Gastronomist, Recipe, UserService) {  //have to load Company and UserService SERVICE
 
     $scope.editedGastronomist = null;  //edited gastronomist
     $scope.isEditing = false;
 
     // Get specific gastronomist
     $scope.gastronomist = Gastronomist.get({username:$routeParams.id});
+    $scope.recipes = Recipe.query();
 
     //Edit
     $scope.edit = function(){
@@ -61,6 +62,10 @@ ctrls.controller("gastronomistsCtrl", ['$scope', '$http', "$location", '$routePa
                 console.log("Deletion failed...");
             }
         );
+    }
+
+    $scope.createRecipe = function() {
+        $location.path("/recipes/create");
     }
 
 }]);
