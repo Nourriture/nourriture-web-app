@@ -218,7 +218,7 @@ if (addrecipe.title && addrecipe.title != "" &&
     $scope.search = function(name)
       {
         $scope.ingredientslist = [];
-        var a = Ingredient.byName({nameId:name}, function()
+        var a = Ingredient.query({name:name}, function()
             {
                 $scope.tmp = a;
                 for (b = 0; b < $scope.tmp.length; b++)
