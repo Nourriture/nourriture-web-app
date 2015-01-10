@@ -184,3 +184,11 @@
 .panel .section-form-profile .form-group span {
     height: auto;
 }
+
+a {
+    color: #54CA42
+}
+
+a:hover {
+    color: #41B62A
+}
