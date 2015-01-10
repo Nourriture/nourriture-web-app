@@ -102,11 +102,16 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
 
 }]);
 
-ctrls.controller("searchRecipes", ['$scope', '$http', '$location', "Recipe", function ($scope, $http, $location, Recipe) {
+ctrls.controller("searchRecipes", ['$scope', '$http', '$location', '$routeParams', "Recipe", function ($scope, $http, $location, $routeParams, Recipe) {
 
 $scope.tmp = [];
 $scope.loadshow = true;
+
 $scope.search = function(titleId) {
+    $location.search({ title:titleId });
+}
+
+$scope.doSearch = function(titleId) {
 
     $scope.tmp = Recipe.query({title: titleId}, function () {
 
@@ -124,6 +129,7 @@ $scope.search = function(titleId) {
     });
 }
 
+
 $scope.loadMore = function ()
 {
     var indexTmp = index + 10;
@@ -139,6 +145,10 @@ $scope.toggleShow = function (data)
     {
         console.log(data);
         $location.path("/recipes/profile/" + data._id);
+    }
+
+    if($routeParams.title) {
+        $scope.doSearch($routeParams.title);
     }
 
 }]);
