@@ -16,8 +16,8 @@
             <div class="col-sm-9 col-xs-9">
                 <div ng-repeat="recipe in recipeslist" class="row list-recipe">
                     <div class="col-sm-3 col-xs-3">
-                        <a href="/#/recipes/profile/{{recipe._id}}">
-                            <img ng-src="{{recipe.picture}}" />
+                        <a href="/#/recipes/profile/{{recipe._id}}" class="profile-picture">
+                            <img class="img-responsive" ng-src="{{recipe.picture}}" />
                         </a>
                     </div>
                     <div class="col-sm-9 col-xs-9">
