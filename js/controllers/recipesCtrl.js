@@ -106,14 +106,12 @@ ctrls.controller("searchRecipes", ['$scope', '$http', '$location', "Recipe", fun
 
 $scope.tmp = [];
 $scope.loadshow = true;
-$scope.search = function(titleId)
-      {
+$scope.search = function(titleId) {
 
-        $scope.tmp = Recipe.byTitle({titleId:titleId});
+    $scope.tmp = Recipe.query({title: titleId}, function () {
 
         $scope.recipeslist = [];
-        if ($scope.tmp.length > 10)
-        {
+        if ($scope.tmp.length > 10) {
             $scope.loadshow = false;
             for (index = 0; index < 10; index++) {
                 $scope.recipeslist.push($scope.tmp[index]);
@@ -123,7 +121,8 @@ $scope.search = function(titleId)
             $scope.loadshow = true;
             $scope.recipeslist = $scope.tmp;
         }
-        };
+    });
+}
 
 $scope.loadMore = function ()
 {
