@@ -69,8 +69,7 @@ ctrls.controller("ingredientCreationCtrl", ['$scope', '$http', "$location", 'Ing
             Ingredient.save({}, $scope.ingredient,
                 function(response){
                     console.log("Success");
-
-                    $("#ingredient-created-confirm").modal();
+                    $location.path("/ingredient/" + response._id);
                 },
                 function(response){
                    console.log("Ups error");
