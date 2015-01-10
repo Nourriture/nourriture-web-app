@@ -1,9 +1,5 @@
 <div class="main-container container" id="main-container">
     <div>
-        <div class="page-header">
-            <h1>Gastronomist profile</h1>
-        </div>
-
         <div id="user-profile-1" class="user-profile row">
             <div class="col-xs-12 col-sm-3 center">
                 <div>
@@ -57,7 +53,7 @@
 
                 <div class="profile-user-info profile-user-info-striped">
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> Gastronomist name </div>
+                        <div class="profile-info-name"> Name </div>
 
                         <div class="profile-info-value">
                             <span ng-if="!isEditing">{{gastronomist.name}}</span>
@@ -66,7 +62,7 @@
                     </div>
 
                     <div class="profile-info-row">
-                        <div class="profile-info-name"> Biographie </div>
+                        <div class="profile-info-name"> Biography </div>
 
                         <div class="profile-info-value">
                             <span ng-if="!isEditing">{{gastronomist.bio}}</span>
@@ -80,16 +76,6 @@
                         <div class="profile-info-value">
                             <span ng-if="!isEditing">{{gastronomist.occupation}}</span>
                             <input ng-if="isEditing" type="text" ng-model="editedGastronomist.occupation" />
-                        </div>
-                    </div>
-
-                
-
-                    <div class="profile-info-row" ng-if="!isEditing">
-                        <div class="profile-info-name"> Username </div>
-
-                        <div class="profile-info-value">
-                            <span class="text-muted" id="username">{{gastronomist.username}}</span>
                         </div>
                     </div>
 
@@ -119,8 +105,8 @@
                 </div>
 
 
-
-                <div class="btn-group">
+                <br />
+                <div class="btn-group pull-right">
                     <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="!isEditing" ng-click="delete()">
                         <i class="ace-icon fa fa-trash"></i>
                         <span class="bigger-110">Delete Gastronomist</span>
