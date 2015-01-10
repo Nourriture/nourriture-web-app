@@ -64,19 +64,19 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/createCompanyProfile.html",
                 controller: "companyCreationCtrl"
             }).
-            when('/ingredientProfile/:id', {
+            when('/ingredient/:id', {
                 templateUrl: "/partials/ingredientProfile.html",
                 controller: "ingredientCtrl"
             }).
-            when('/createIngredientProfile', {
+            when('/createIngredient', {
                 templateUrl: "/partials/createIngredientProfile.html",
                 controller: "ingredientCreationCtrl"
             }).
-            when('/searchIngredientProfile', {
+            when('/searchIngredient', {
                 templateUrl: "/partials/searchIngredientProfile.html",
                 controller: "searchIngredientCtrl"
             }).
-            when('/searchIngredientProfileByCompany', {
+            when('/searchIngredientByCompany', {
                 templateUrl: "/partials/searchIngredientProfileByCompany.html",
                 controller: "searchIngredientByCompanyCtrl"
             }).
