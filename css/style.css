@@ -192,3 +192,7 @@ a {
 a:hover {
     color: #41B62A
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

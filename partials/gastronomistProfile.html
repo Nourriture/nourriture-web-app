@@ -106,7 +106,7 @@
 
 
                 <br />
-                <div class="btn-group pull-right">
+                <div class="btn-group pull-right" ng-show="username == gastronomist.username" ng-cloak>
                     <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="!isEditing" ng-click="delete()">
                         <i class="ace-icon fa fa-trash"></i>
                         <span class="bigger-110">Delete Gastronomist</span>
@@ -147,7 +147,7 @@
                     </div>
                 </div>
                 <div class="space-24"></div>
-                <button type="button" class="pull-right btn btn-sm btn-primary" ng-click="createRecipe()">
+                <button type="button" class="pull-right btn btn-sm btn-primary" ng-click="createRecipe()" ng-show="user && (user.username == id)" ng-cloak>
                     <i class="ace-icon fa fa-plus"></i>
                     <span class="bigger-110">Create Recipe</span>
                 </button>

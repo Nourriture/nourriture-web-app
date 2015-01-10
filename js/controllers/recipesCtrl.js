@@ -176,9 +176,11 @@ $scope.toggleShow = function (data)
 }]);
 
 
-ctrls.controller("profileRecipes", ['$scope', '$http', '$location', "$routeParams", "Recipe", function ($scope, $http, $location, $routeParams, Recipe) {
+ctrls.controller("profileRecipes", ['$scope', '$http', '$location', "$routeParams", "UserService", "Recipe", function ($scope, $http, $location, $routeParams, UserService, Recipe) {
 $scope.Id = $routeParams.Id;
 $scope.addrecipe = {};
+$scope.user = UserService.user;
+
 var tmp = Recipe.get({id:$scope.Id}, function(){
     $scope.addrecipe = tmp;
     $scope.steps = $scope.addrecipe.instructions.length;

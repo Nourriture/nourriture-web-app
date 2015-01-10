@@ -9,6 +9,7 @@ ctrls.controller("gastronomistsCtrl", ['$scope', '$http', '$location', '$routePa
 
     $scope.editedGastronomist = null;  //edited gastronomist
     $scope.isEditing = false;
+    $scope.user = UserService.user
 
     // Get specific gastronomist
     $scope.gastronomist = Gastronomist.get({username:$routeParams.id});
