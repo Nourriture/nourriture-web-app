@@ -40,6 +40,10 @@ app.config(["$routeProvider", "$httpProvider",
                 templateUrl: "/partials/searchRecipes.html",
                 controller: "searchRecipes"
             }).
+            when('/recipes', {
+                templateUrl: "/partials/listRecipes.html",
+                controller: "listRecipes"
+            }).
             when('/recipes/profile/:Id?', {
                 templateUrl: "/partials/recipeProfile.html",
                 controller: "profileRecipes"

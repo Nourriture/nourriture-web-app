@@ -102,6 +102,10 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
 
 }]);
 
+ctrls.controller("listRecipes", ['$scope', '$http', '$location', '$routeParams', "Recipe", function ($scope, $http, $location, $routeParams, Recipe) {
+    $scope.recipes = Recipe.query();
+}]);
+
 ctrls.controller("searchRecipes", ['$scope', '$http', '$location', '$routeParams', "Recipe", function ($scope, $http, $location, $routeParams, Recipe) {
 
 $scope.tmp = [];
