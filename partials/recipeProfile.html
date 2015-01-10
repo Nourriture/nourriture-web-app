@@ -38,12 +38,16 @@
                     <ul class="list-recipe" ng-repeat="ingd in addrecipe.ingredients">
                         <li>
                         <div class="row">
-                            <div class="col-sm-1">
+                            <div class="col-sm-4 col-xs-8">
                                 <a href="/#/ingredient/{{ingd.original}}">
                                     <label style="cursor:pointer">{{ingd.name}}</label>
                                 </a>
                             </div>
-                            <div class="col-sm-1"><span class="quantity">{{addrecipe.ingredients[$index].quantity}}</span><label class="unit">{{ingd.quantityUnit}}</label>
+                            <div class="col-sm-2 col-xs-2">
+                                <span class="quantity">{{addrecipe.ingredients[$index].quantity}}</span>
+                            </div>
+                            <div class="col-sm-1 col-xs-2">
+                                <label class="unit">{{ingd.quantityUnit}}</label>
                             </div>
                         </div>
                         </li>
