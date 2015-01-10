@@ -18517,14 +18517,14 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 	*/
 }
 .no-skin .navbar .navbar-toggle {
-  background-color: #75B3D7;
+  background-color: #85D775;
 }
 .no-skin .navbar .navbar-toggle:focus {
-  background-color: #75B3D7;
+  background-color: #85D775;
   border-color: transparent;
 }
 .no-skin .navbar .navbar-toggle:hover {
-  background-color: #61a8d1;
+  background-color: #74D161;
   border-color: rgba(255, 255, 255, 0.1);
 }
 .no-skin .navbar .navbar-toggle.display,
