@@ -181,3 +181,6 @@
 .radius-btn{
     border-radius: 200px;
 }
+.panel .section-form-profile .form-group span {
+    height: auto;
+}
