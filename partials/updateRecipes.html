@@ -74,14 +74,29 @@
                 <label class="control-label lit-recipe">My list :</label>
                     <ul class="list-recipe" ng-repeat="ingd in addrecipe.ingredients">
                         <li>
-                        <div class="row">
-                            <div class="col-sm-4">
-                            <label >{{ingd.name}}</label></div> 
-                            <div class="col-sm-4"><input class="quantity" type="number" min="1" value="1" ng-model="addrecipe.ingredients[$index].quantity"><label class="unit">{{ingd.quantityUnit}}</label>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label >{{ingd.name}}</label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input class="quantity" type="number" min="1" value="1" ng-model="addrecipe.ingredients[$index].quantity">
+                                    <select ng-model="ingd.quantityUnit" ng-if="ingd.quantityUnit.match('g|dcg|ounce|kg')">
+                                        <option value="g">g</option>
+                                        <option value="dcg">dcg</option>
+                                        <option value="ounce">ounce</option>
+                                        <option value="kg">kg</option>
+                                    </select>
+                                    <select ng-model="ingd.quantityUnit" ng-if="ingd.quantityUnit.match('tsp|spoon|dl|cup')">
+                                        <option value="tsp">tsp</option>
+                                        <option value="spoon">spoon</option>
+                                        <option value="dl">dl</option>
+                                        <option value="cup">cup</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="button" class="radius-btn btn btn-danger" value="X" ng-click="toggleDelete($index)">
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                            <input type="button" class="radius-btn btn btn-danger" value="X" ng-click="toggleDelete($index)"></div>
-                        </div>
                         </li>
                     </ul>
                 </div>
