@@ -58,7 +58,9 @@
                         <li>
                         <div class="row">
                             <div class="col-sm-6 list-recipe-label">
-                            <label>{{ing.name}}</label>
+                                <a href="/#/ingredient/{{ing.original}}">
+                                    <label style="cursor:pointer">{{ing.name}}</label>
+                                </a>
                             </div>
                             <div class="col-sm-6">
                                 <input type="button" class="btn btn-success" value="add" ng-click="toggleAdd($index)">
@@ -74,7 +76,7 @@
                         <li>
                         <div class="row">
                             <div class="col-sm-4">
-                            <label >{{ingd.name}}</label></div> 
+                            <label >{{ingd.name}}</label></div>
                             <div class="col-sm-4"><input class="quantity" type="number" min="1" value="1" ng-model="addrecipe.ingredients[$index].quantity"><label class="unit">{{ingd.quantityUnit}}</label>
                             </div>
                             <div class="col-sm-4">
