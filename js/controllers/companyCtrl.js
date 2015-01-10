@@ -12,7 +12,7 @@ ctrls.controller("companyCtrl", ['$scope', '$http', "$location", '$routeParams',
     $scope.company = Company.get({username:$routeParams.id});
 
     // Get ingredients
-    $scope.ingredients = Ingredient.query({ company:UserService.user.username });
+    $scope.ingredients = Ingredient.query({ company:$routeParams.id });
 
     //Edit
     $scope.edit = function(){
