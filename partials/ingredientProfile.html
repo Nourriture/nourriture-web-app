@@ -1,7 +1,7 @@
 <div class="main-container container" id="main-container">
     <div>
         <div class="page-header">
-            <h1>Ingredient profile</h1>
+            <h1>{{ingredient.name}}</h1>
         </div>
 
         <div id="user-profile-1" class="user-profile row">
@@ -12,12 +12,6 @@
 					</span>
 
                     <div class="space-4"></div>
-
-                    <div class="width-80 label label-info label-xlg arrowed-in arrowed-in-right">
-                        <div class="inline position-relative">
-                                <span class="white">{{ingredient.name}}</span>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="hr hr16 dotted"></div>
@@ -99,9 +93,9 @@
                     </div>
                 </div>
 
+                <br/>
 
-
-                <div class="btn-group">
+                <div class="btn-group pull-right">
                     <button type="button" class="pull-right btn btn-sm btn-danger" ng-if="!isEditing" ng-click="delete()">
                         <i class="ace-icon fa fa-trash"></i>
                         <span class="bigger-110">Delete Ingredient</span>
