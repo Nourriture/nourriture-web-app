@@ -68,7 +68,22 @@ ctrls.controller("recipesCtrl", ['$scope', '$http', '$location', "Recipe", "Ingr
         console.log(index);
         if ($scope.addrecipe.ingredients.indexOf($scope.ingredientslist[index]) == -1)
         {
-            $scope.addrecipe.ingredients.push($scope.ingredientslist[index]);
+            var sIng = $scope.ingredientslist[index];
+
+            // Select default quanity unit
+            var defUnit = "g";
+            if(sIng.type == "liquid") {
+                defUnit = "dl"
+            }
+
+            // Compose ingredient
+            var pIngredient = {
+                name: sIng.name,
+                original: sIng._id,
+                quantity: 1,
+                quantityUnit: defUnit,
+            };
+            $scope.addrecipe.ingredients.push(pIngredient);
         }
         else
         {
