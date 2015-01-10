@@ -1,7 +1,7 @@
 <div class="main-container container" id="main-container">
     <section class="panel">
         <div class="page-header">
-            <h1>Profile Recipe</h1>
+            <h1>{{addrecipe.title}}</h1>
         </div>
         <div class="col-xs-12">
         <form class="form-horizontal form-recipe-create" role="form">
@@ -16,12 +16,6 @@
             </div>
         </div>
         <br />
-        <div class="form-group">
-            <label class="control-label col-sm-3 no-padding-right">Title:</label>
-            <div class="col-sm-9">
-            <span class="input-width">{{addrecipe.title}}</span>
-            </div>
-        </div>
         <div class="form-group">
             <label class="control-label col-sm-3 no-padding-right">Description:</label>
             <div class="col-sm-9">
@@ -39,7 +33,7 @@
             <section class="section-form">        
         <div class="form-group">
                 
-                <label class="control-label col-sm-3 no-padding-right">My list :</label>
+                <label class="control-label col-sm-3 no-padding-right">Ingredients :</label>
                 <div class="col-sm-9">
                     <ul class="list-recipe" ng-repeat="ingd in addrecipe.ingredients">
                         <li>
@@ -71,11 +65,11 @@
         </div>
         </div>
         </section>
-        <div class="form-group">       
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-success" ng-click="toggleUpdate()">Update</button>
+
+        <br />
+        <div class="form-group pull-right">
+                <button type="button" class="btn btn-primary" ng-click="toggleUpdate()">Edit</button>
                 <button type="button" class="btn btn-danger" ng-click="toggleDelete()">Delete</button>
-              </div>
         </div>
         </section>
     </form>
