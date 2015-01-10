@@ -8,7 +8,7 @@ ctrls.controller("ingredientCtrl", ['$scope', '$http', '$location', '$routeParam
     $scope.edit = function(){
         $scope.isEditing = true;
 
-        $scope.editedIngerdient = angular.copy($scope.ingredient)
+        $scope.editedIngredient = angular.copy($scope.ingredient)
     }
 
     $scope.abortEdit = function(){
