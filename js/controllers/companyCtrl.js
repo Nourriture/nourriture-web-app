@@ -64,6 +64,10 @@ ctrls.controller("companyCtrl", ['$scope', '$http', "$location", 'Company', 'Ing
         );
     }
 
+    $scope.addIngredient = function() {
+        $location.path("/createIngredient");
+    }
+
 }]);
 
 // "Create company profile" page
