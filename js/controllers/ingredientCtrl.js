@@ -1,11 +1,9 @@
-ctrls.controller("ingredientCtrl", ['$scope', '$http', '$location', 'Ingredient', 'UserService', function ($scope, $http, $location, Ingredient, UserService) {
+ctrls.controller("ingredientCtrl", ['$scope', '$http', '$location', '$routeParams', 'Ingredient', 'UserService', function ($scope, $http, $location, $routeParams, Ingredient, UserService) {
 
     $scope.ingredient = {};
     $scope.missingRequired = false;
 
-    var ingr = Ingredient.query({username:UserService.user.username}, function() {
-        $scope.ingredient = ingr[0];
-    });
+    $scope.ingredient = Ingredient.get({ id:$routeParams.id });
 
     $scope.edit = function(){
         $scope.isEditing = true;
