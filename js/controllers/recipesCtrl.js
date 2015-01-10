@@ -149,6 +149,9 @@ $scope.toggleShow = function (data)
 
     if($routeParams.title) {
         $scope.doSearch($routeParams.title);
+        $scope.recipe = {
+            name: $routeParams.title
+        };
     }
 
 }]);

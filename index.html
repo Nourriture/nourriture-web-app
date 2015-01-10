@@ -167,11 +167,13 @@
             <!-- Search bar -->
             <form class="navbar-form navbar-left form-search" role="search">
                 <div class="form-group">
-                    <input type="text" placeholder="Food search!" />
+                    <input type="text" placeholder="Food search!" ng-model="navSearch" />
                 </div>
 
                 <button type="button" class="btn btn-xs btn-info2">
-                    <i class="ace-icon fa fa-search icon-only bigger-110"></i>
+                    <a  href="/#/recipes/search?title={{navSearch}}" style="color:white">
+                        <i class="ace-icon fa fa-search icon-only bigger-110"></i>
+                    </a>
                 </button>
             </form>
         </nav>
